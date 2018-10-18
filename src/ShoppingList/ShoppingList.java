@@ -5,17 +5,29 @@
  */
 package ShoppingList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author smg
  */
 public class ShoppingList {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    
+    private String name;
+    private List<Item> items;
+    
+    public ShoppingList(String name){
+        name = this.name;
+        items = new ArrayList<>();
+    }
+    
+    public void addItem(Item item){
+     items.add(item);
+    }
+    
+    public void removeItem(Item item){
+        items.remove(item);
     }
     
 }
