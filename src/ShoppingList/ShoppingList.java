@@ -22,6 +22,7 @@ public class ShoppingList {
         items = new ArrayList<>();
     }
     
+    // Adding an Item
     public void addItem(Item item){
      items.add(item);
     }
