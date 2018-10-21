@@ -24,10 +24,12 @@ public class Item {
         check = false;
     }
     
+    // Marking an item as bought [check]
     public void check(){
         check = true;
     }
     
+    // Chaning the amount of an item
     public void changeAmount(String amount){
         amount = this.amount;
     }

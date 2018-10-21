@@ -27,6 +27,7 @@ public class ShoppingList {
      items.add(item);
     }
     
+    // Removing an Item
     public void removeItem(Item item){
         items.remove(item);
     }
