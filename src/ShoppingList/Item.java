@@ -17,10 +17,10 @@ public class Item {
     private boolean check;
     
     public Item (String name, Category category, int priority, String amount){
-        name = this.name;
-        category = this.category;
-        priority = this.priority;
-        amount = this.amount;
+        this.name = name;
+        this.category = category;
+        this.priority = priority;
+        this.amount = amount;
         check = false;
     }
     
@@ -32,5 +32,20 @@ public class Item {
     // Chaning the amount of an item
     public void changeAmount(String amount){
         amount = this.amount;
+    }
+
+    public String getName() {
+        return name;
+    }
+    
+    // Preparing of Attributes for the text file
+    public String txtFormat(){
+        String txtF = name + ";;;" 
+                + category.getName() + ";;;"
+                + store.getName() + ";;;"
+                + String.valueOf(priority)+ ";;;"
+                + String.valueOf(amount) + ";;;"
+                + String.valueOf(check) + "::::";
+        return txtF;
     }
 }

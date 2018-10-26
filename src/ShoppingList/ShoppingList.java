@@ -42,7 +42,6 @@ public class ShoppingList {
      writer.write(item.toString());
         System.out.println("added item: " + item.getName());
      writer.close();
-     // position++;
     }
     
     // Removing an Item
