@@ -14,6 +14,7 @@ public class Item {
     private Store store;
     private int priority;
     private String amount;
+    private String seperator;
     private boolean check;
     
     public Item (String name, Category category, int priority, String amount){
@@ -21,6 +22,7 @@ public class Item {
         this.category = category;
         this.priority = priority;
         this.amount = amount;
+        this.seperator = ";;;";
         check = false;
     }
     
@@ -31,7 +33,7 @@ public class Item {
     
     // Chaning the amount of an item
     public void changeAmount(String amount){
-        amount = this.amount;
+        this.amount = amount;
     }
 
     public String getName() {
@@ -39,13 +41,12 @@ public class Item {
     }
     
     // Preparing of Attributes for the text file
-    public String txtFormat(){
-        String txtF = name + ";;;" 
-                + category.getName() + ";;;"
-                + store.getName() + ";;;"
-                + String.valueOf(priority)+ ";;;"
-                + String.valueOf(amount) + ";;;"
-                + String.valueOf(check) + "::::";
+    public String toString(){
+        String txtF = name + seperator 
+                + category.getName() + seperator
+                + String.valueOf(priority)+ seperator
+                + String.valueOf(amount) + seperator
+                + String.valueOf(check);
         return txtF;
     }
 }

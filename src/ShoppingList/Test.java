@@ -17,10 +17,17 @@ public class Test {
         test1();
     }
     
+    // Item (String name, Category category, int priority, String amount)
     public static void test1() throws IOException{
         ShoppingList shoppingList = new ShoppingList("List1");
         Category drinks = new Category("Drinks");
-        Item milk = new Item("Milch", null, 0, null);
+        Category food = new Category("Food");
+        Item milk = new Item("Milch", drinks, 0, null);
+        Item honey = new Item("Honig", food, 1, null);
+        Item nutella = new Item("Nutella", null, 0, "3");
         shoppingList.addItem(milk);
+        shoppingList.addItem(honey);
+        shoppingList.addItem(nutella);
+        
     }
 }
