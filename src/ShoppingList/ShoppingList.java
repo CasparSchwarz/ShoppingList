@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,25 +24,21 @@ public class ShoppingList {
     private String fileName;
     private List<Item> items;
     // private int position;
-    private File shoppingList;
-    private FileWriter writer;
+    private PrintWriter out;
     
     public ShoppingList(String name) throws IOException{
         this.name = name;
-        this.fileName = "/src/saves/" + name + ".txt";
+        this.fileName = name + ".txt";
         
         items = new ArrayList<>();
-        shoppingList = new File(fileName);
-        writer = new FileWriter(shoppingList);
-        // position = 0;
+        out = new PrintWriter(fileName);
     }
     
     // Adding an Item
     public void addItem(Item item) throws IOException{
      items.add(item);
-     writer.write(item.toString());
-        System.out.println("added item: " + item.getName());
-     writer.close();
+     out.println(item.toString());
+     out.close();
     }
     
     // Removing an Item
