@@ -5,6 +5,11 @@
  */
 package ShoppingList;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,4 +37,11 @@ public class ShoppingList {
         items.remove(item);
     }
     
+    public void editTxt(String filename, String data, long position) 
+        throws IOException{
+            RandomAccessFile writer = new RandomAccessFile(filename, "rw");
+            writer.seek(position);
+            writer.writeUTF(data);
+            writer.close();
+        }
 }
