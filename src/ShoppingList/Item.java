@@ -41,6 +41,7 @@ public class Item {
     }
     
     // Preparing of Attributes for the text file
+    @Override
     public String toString(){
         String txtF = name + seperator 
                 + category.getName() + seperator

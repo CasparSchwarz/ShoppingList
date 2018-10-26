@@ -6,6 +6,7 @@
 package ShoppingList;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -28,7 +29,7 @@ public class ShoppingList {
     
     public ShoppingList(String name) throws IOException{
         this.name = name;
-        this.fileName = name + ".txt";
+        this.fileName = "src/saves/" + name + ".txt";
         
         items = new ArrayList<>();
         out = new PrintWriter(fileName);
@@ -36,24 +37,40 @@ public class ShoppingList {
     
     // Adding an Item
     public void addItem(Item item) throws IOException{
-     items.add(item);
-     out.println(item.toString());
-     out.close();
+        items.add(item);
+        out.println(item.toString());
+        out.print("test");
+        out.close();
     }
     
-    // Removing an Item
     public void removeItem(Item item)throws IOException {
         items.remove(item);
-        File f = new File(fileName);
-        FileReader fr = new FileReader(f);
-        BufferedReader br = new BufferedReader(fr);
-        String line = null;
-        while(br.readLine() != null){
-            if(line.equals(item.toString())){
-                line = line.replace(item.toString(), null);
-            }
+        File inputFile = new File(fileName);
+        File tempFile = new File("src/saves/temp.txt");
+
+        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+        String lineToRemove = item.toString();
+        String currentLine;
+
+        while((currentLine = reader.readLine()) != null) {
+            if(currentLine.equals(lineToRemove)) continue;
+            writer.write(currentLine + System.getProperty("line.separator"));
         }
-        fr.close();
-        br.close();
+        writer.close(); 
+        reader.close(); 
+        inputFile.delete();
+        if(tempFile.renameTo(inputFile)){
+            System.out.println("Item removal succesful");
+        } else{
+            System.out.println("Item removal failed");
+        }
     }
+
+    public List<Item> getItems() {
+        return items;
+    }
+    
+    
 }
