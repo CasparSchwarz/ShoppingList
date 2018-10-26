@@ -5,13 +5,11 @@
  */
 package ShoppingList;
 
-import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,39 +20,44 @@ import java.util.List;
 public class ShoppingList {
     
     private String name;
+    private String fileName;
     private List<Item> items;
-    private int position;
+    // private int position;
     private File shoppingList;
     private FileWriter writer;
     
     public ShoppingList(String name) throws IOException{
         this.name = name;
+        this.fileName = "/src/saves/" + name + ".txt";
+        
         items = new ArrayList<>();
-        shoppingList = new File("ShoppingList.txt");
+        shoppingList = new File(fileName);
         writer = new FileWriter(shoppingList);
-        position = 1;
+        // position = 0;
     }
     
     // Adding an Item
     public void addItem(Item item) throws IOException{
      items.add(item);
-     String itemName = item.getName();
-     writer.write(item.txtFormat());
-        System.out.println(itemName);
+     writer.write(item.toString());
+        System.out.println("added item: " + item.getName());
      writer.close();
-     position++;
+     // position++;
     }
     
     // Removing an Item
-    public void removeItem(Item item){
+    public void removeItem(Item item)throws IOException {
         items.remove(item);
-    }
-    
-    public void editTxt(String filename, String data, int position) 
-        throws IOException{
-            RandomAccessFile writer = new RandomAccessFile(filename, "rw");
-            writer.seek(position);
-            writer.writeUTF(data);
-            writer.close();
+        File f = new File(fileName);
+        FileReader fr = new FileReader(f);
+        BufferedReader br = new BufferedReader(fr);
+        String line = null;
+        while(br.readLine() != null){
+            if(line.equals(item.toString())){
+                line = line.replace(item.toString(), null);
+            }
         }
+        fr.close();
+        br.close();
+    }
 }
