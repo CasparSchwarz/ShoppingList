@@ -44,6 +44,8 @@ public class ShoppingList {
     }
     
     public void saveList() throws IOException{
+        list.delete();
+        out = new PrintWriter(fileName);
         for (int i = 0; i < items.size(); i++){
             out.println(items.get(i).toString());
         }

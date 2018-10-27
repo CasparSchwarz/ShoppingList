@@ -28,10 +28,14 @@ public class Test {
         Item milk = new Item("Milch", drinks, 0, null);
         Item honey = new Item("Honig", food, 1, null);
         Item nutella = new Item("Nutella", food, 0, "3");
+        Item cheese = new Item("Käse", food, 0, "5");
+        
         shoppingList.addItem(milk);
         shoppingList.addItem(honey);
         shoppingList.addItem(nutella);
         shoppingList.removeItem(milk);
+        shoppingList.saveList();
+        shoppingList.addItem(cheese);
         shoppingList.saveList();
         
         List<Item> it = shoppingList.getItems();
