@@ -31,13 +31,18 @@ public class Test {
         Item cheese = new Item("Käse", food, 0, "5");
         
         shoppingList.addItem(milk);
+        shoppingList.replaceItem(milk, cheese);
         shoppingList.addItem(honey);
         shoppingList.addItem(nutella);
         shoppingList.removeItem(milk);
-        shoppingList.addItem(cheese);
+        
+        shoppingList.editItem(cheese, "Gouda", null, null, null, null);
+        shoppingList.editItem(cheese, null, drinks, null, null, null);
         
         List<Item> it = shoppingList.getItems();
-        System.out.println(it.toString());
+        for (int i = 0; i < it.size(); i++){
+            System.out.println(it.get(i).toString());
+        }
         
     }
 }

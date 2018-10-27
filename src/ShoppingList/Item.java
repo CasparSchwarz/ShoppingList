@@ -25,19 +25,33 @@ public class Item {
         this.seperator = ";;;";
         check = false;
     }
-    
-    // Marking an item as bought [check]
-    public void check(){
-        check = true;
-    }
-    
-    // Chaning the amount of an item
-    public void changeAmount(String amount){
-        this.amount = amount;
-    }
 
     public String getName() {
         return name;
+    }
+    
+    public void setAmount(String amount){
+        this.amount = amount;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
     }
     
     // Preparing of Attributes for the text file

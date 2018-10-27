@@ -28,8 +28,8 @@ public class ShoppingList {
     private File list;
     
     public ShoppingList(String name){
-        dir = "src/savess/";
         this.name = name;
+        this.dir = "src/saves/";
         this.fileName = dir + name + ".txt";
         
         // Creating new dir if given dir doesn't exist, creating new file
@@ -48,8 +48,8 @@ public class ShoppingList {
         items.add(item);
         try(FileWriter fw = new FileWriter(fileName, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter out = new PrintWriter(bw)){
-            out.println(item.toString());
+            PrintWriter pw = new PrintWriter(bw)){
+            pw.println(item.toString());
         }
     }
     
@@ -65,6 +65,26 @@ public class ShoppingList {
     
     public void removeItem(Item item)throws IOException {
         items.remove(item);
+        saveList();
+    }
+    
+    public void replaceItem(Item oldItem, Item newItem) throws IOException{
+        addItem(newItem);
+        removeItem(oldItem);
+    }
+    
+    public void editItem(Item item, String name, Category category, Integer priority, String amount, Boolean check) throws IOException{
+        if(name != null){
+            item.setName(name);
+        } else if(category.getName() != null){
+            item.setCategory(category);
+        } else if(priority != null){
+            item.setPriority(priority.intValue());
+        } else if(amount != null){
+            item.setAmount(amount);
+        } else if(check != null){
+            item.setCheck(check.booleanValue());
+        }
         saveList();
     }
 
