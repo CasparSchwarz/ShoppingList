@@ -34,9 +34,7 @@ public class Test {
         shoppingList.addItem(honey);
         shoppingList.addItem(nutella);
         shoppingList.removeItem(milk);
-        shoppingList.saveList();
         shoppingList.addItem(cheese);
-        shoppingList.saveList();
         
         List<Item> it = shoppingList.getItems();
         System.out.println(it.toString());

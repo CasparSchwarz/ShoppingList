@@ -5,10 +5,8 @@
  */
 package ShoppingList;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,26 +21,39 @@ public class ShoppingList {
     
     private String name;
     private String fileName;
+    private String dir;
     private List<Item> items;
     // private int position;
     private PrintWriter out;
     private File list;
     
-    public ShoppingList(String name) throws IOException{
+    public ShoppingList(String name){
+        dir = "src/savess/";
         this.name = name;
-        this.fileName = "src/saves/" + name + ".txt";
-        list = new File(fileName);
-        items = new ArrayList<>();
-        out = new PrintWriter(fileName);
+        this.fileName = dir + name + ".txt";
+        
+        // Creating new dir if given dir doesn't exist, creating new file
+        try{
+            new File(dir).mkdirs();
+            new File(fileName).createNewFile();
+            list = new File(fileName);
+            items = new ArrayList<>();
+        } catch(IOException e){
+            System.out.println(e);
+        }
     }
     
-    // Adding an Item
+    // Adding an Item and writing to .txt
     public void addItem(Item item) throws IOException{
         items.add(item);
-//        out.println(item.toString());
-//        out.close();
+        try(FileWriter fw = new FileWriter(fileName, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter out = new PrintWriter(bw)){
+            out.println(item.toString());
+        }
     }
     
+    // Refreshing .txt
     public void saveList() throws IOException{
         list.delete();
         out = new PrintWriter(fileName);
@@ -54,29 +65,7 @@ public class ShoppingList {
     
     public void removeItem(Item item)throws IOException {
         items.remove(item);
-//        File inputFile = list;
-//        File tempFile = new File("src/saves/temp.txt");
-//
-//        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-//        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-//
-//        String lineToRemove = item.toString();
-//        String currentLine;
-//
-//        while((currentLine = reader.readLine()) != null) {
-//            if(currentLine.equals(lineToRemove)) continue;
-//            writer.write(currentLine + System.getProperty("line.separator"));
-//        }
-//        writer.close(); 
-//        reader.close();
-//        tempFile.renameTo(inputFile);
-//        inputFile.delete();
-//        if(tempFile.renameTo(inputFile)){
-//            System.out.println("Item removal succesful");
-//        } else{
-//            System.out.println("Item removal failed");
-//        }
-//        tempFile.delete();
+        saveList();
     }
 
     public List<Item> getItems() {
