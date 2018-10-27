@@ -36,8 +36,8 @@ public class Test {
         shoppingList.addItem(nutella);
         shoppingList.removeItem(milk);
         
-        shoppingList.editItem(cheese, "Gouda", null, null, null, null);
-        shoppingList.editItem(cheese, null, drinks, null, null, null);
+        // public void editItem(Item item, String name, Category category, Integer priority, String amount, Boolean check)
+        shoppingList.editItem(cheese, "Gouda", drinks, 0, "1", true);
         
         List<Item> it = shoppingList.getItems();
         for (int i = 0; i < it.size(); i++){

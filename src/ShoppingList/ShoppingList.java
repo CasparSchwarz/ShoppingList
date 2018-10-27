@@ -23,7 +23,6 @@ public class ShoppingList {
     private String fileName;
     private String dir;
     private List<Item> items;
-    // private int position;
     private PrintWriter out;
     private File list;
     
@@ -44,47 +43,51 @@ public class ShoppingList {
     }
     
     // Adding an Item and writing to .txt
-    public void addItem(Item item) throws IOException{
+    public void addItem(Item item){
         items.add(item);
-        try(FileWriter fw = new FileWriter(fileName, true);
+        try{
+            FileWriter fw = new FileWriter(fileName, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw)){
+            PrintWriter pw = new PrintWriter(bw);
             pw.println(item.toString());
+        } catch(IOException e){
+            System.out.println(e);
         }
     }
     
     // Refreshing .txt
-    public void saveList() throws IOException{
+    public void saveList(){
         list.delete();
-        out = new PrintWriter(fileName);
-        for (int i = 0; i < items.size(); i++){
-            out.println(items.get(i).toString());
+        try{
+            out = new PrintWriter(fileName);
+            for (int i = 0; i < items.size(); i++){
+                out.println(items.get(i).toString());
+            }
+            out.close();
+        } catch(IOException e){
+            System.out.println(e);
         }
-        out.close();
     }
     
-    public void removeItem(Item item)throws IOException {
+    // Removes item from List and refreshes .txt
+    public void removeItem(Item item){
         items.remove(item);
         saveList();
     }
     
-    public void replaceItem(Item oldItem, Item newItem) throws IOException{
+    // Replaces oldItem with newItem
+    public void replaceItem(Item oldItem, Item newItem){
         addItem(newItem);
         removeItem(oldItem);
     }
     
-    public void editItem(Item item, String name, Category category, Integer priority, String amount, Boolean check) throws IOException{
-        if(name != null){
-            item.setName(name);
-        } else if(category.getName() != null){
-            item.setCategory(category);
-        } else if(priority != null){
-            item.setPriority(priority.intValue());
-        } else if(amount != null){
-            item.setAmount(amount);
-        } else if(check != null){
-            item.setCheck(check.booleanValue());
-        }
+    // Changes Item-properties and refreshes .txt
+    public void editItem(Item item, String name, Category category, Integer priority, String amount, Boolean check){
+        if(name != null) item.setName(name);
+        if(category != null) item.setCategory(category);
+        if(priority != null) item.setPriority(priority);
+        if(amount != null) item.setAmount(amount);
+        if(check != null) item.setCheck(check);
         saveList();
     }
 
