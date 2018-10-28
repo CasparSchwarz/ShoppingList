@@ -39,14 +39,15 @@ public class FileScanner {
         // StringBuilder sb = new StringBuilder();
         String letter;
         StringBuilder sb = new StringBuilder();
-        String temp = "";
-        int i = 0;
-        int p = 0;
         
         try{
             while((letter = reader.readLine()) != null){
+                String temp = "";
+                int i = 0;
+                int p = 0;
+                System.out.println(letter);
                 Item item = new Item(null, null, 0, null);
-                List1.addItem(item);
+                List1.addItemFS(item);
                 while(i < 4 && p >= 0){
                     //System.out.print(letter.charAt(p));
                     if(letter.charAt(p) == ';' && letter.charAt(p+1) == ';' && letter.charAt(p+2) == ';'){
@@ -79,7 +80,6 @@ public class FileScanner {
                     }
                     temp += Character.toString(letter.charAt(p));
                     System.out.println(temp);
-                    //System.out.print(letter.charAt(p));
                     p++;
                 }
             }
