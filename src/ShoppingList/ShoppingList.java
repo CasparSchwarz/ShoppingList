@@ -45,14 +45,14 @@ public class ShoppingList {
     // Adding an Item and writing to .txt
     public void addItem(Item item){
         items.add(item);
-        try{
-            FileWriter fw = new FileWriter(fileName, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            PrintWriter pw = new PrintWriter(bw);
-            pw.println(item.toString());
-        } catch(IOException e){
-            System.out.println(e);
-        }
+//        try{
+//            FileWriter fw = new FileWriter(fileName, true);
+//            BufferedWriter bw = new BufferedWriter(fw);
+//            PrintWriter pw = new PrintWriter(bw);
+//            pw.println(item.toString());
+//        } catch(IOException e){
+//            System.out.println(e);
+//        }
     }
     
     // Refreshing .txt

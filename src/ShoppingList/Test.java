@@ -15,7 +15,8 @@ import java.util.List;
 public class Test {
     
     public static void main(String[] args) throws IOException {
-        test1();
+        //test1();
+        test2();
     }
     
     // Item (String name, Category category, int priority, String amount)
@@ -43,6 +44,12 @@ public class Test {
         for (int i = 0; i < it.size(); i++){
             System.out.println(it.get(i).toString());
         }
+        
+    }
+    
+    public static void test2() throws IOException {
+        FileScanner fs = new FileScanner();
+        fs.openShoppingList();
         
     }
 }
