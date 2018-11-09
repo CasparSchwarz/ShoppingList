@@ -34,7 +34,7 @@ public class FileScanner {
         }
         
         ShoppingList List1 = new ShoppingList("List1");
-        Category category = new Category("");
+        Category category = new Category("category");
         
         // StringBuilder sb = new StringBuilder();
         String letter;
@@ -83,6 +83,7 @@ public class FileScanner {
                     p++;
                 }
             }
+            System.out.println(List1.getItems().toString());
         } catch (IOException f){
             System.out.println(f);
         }
