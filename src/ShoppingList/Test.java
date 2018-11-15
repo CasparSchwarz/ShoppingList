@@ -51,6 +51,12 @@ public class Test {
             System.out.println(ifi.get(i).toString());
         }
         
+        List<Item> is = shoppingList.pSorter();
+        System.out.println("Sort by Priority: ");
+        for (int i = 0; i < is.size(); i++){
+            System.out.println(is.get(i).toString());
+        }
+        
     }
     
     public static void test2() throws IOException {
