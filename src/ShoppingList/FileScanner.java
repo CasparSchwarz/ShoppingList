@@ -20,7 +20,7 @@ public class FileScanner {
     
     private BufferedReader reader;
     private List<String> items;
-    
+    private List<String> categories;
     /**
      *
      */
@@ -85,6 +85,31 @@ public class FileScanner {
             }
             System.out.println(List1.getItems().toString());
         } catch (IOException f){
+            System.out.println(f);
+        }
+    }
+    
+    public void openCategoryList(){
+                
+        categories = new ArrayList<>();
+        try{
+            reader = new BufferedReader(new FileReader("src/CategoryList"));
+        } catch(FileNotFoundException e){
+            System.out.println(e);
+        }
+        
+        CategoryList List1 = new CategoryList();
+        
+        // StringBuilder sb = new StringBuilder();
+        String letter;
+        StringBuilder sb = new StringBuilder();
+                try{
+            while((letter = reader.readLine()) != null){
+                Category category = new Category(letter);
+                List1.addCategoryFS(category);
+            }
+            
+        }catch (IOException f){
             System.out.println(f);
         }
     }
