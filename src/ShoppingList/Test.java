@@ -15,8 +15,8 @@ import java.util.List;
 public class Test {
     
     public static void main(String[] args) throws IOException {
-        //test1();
-        test2();
+        test1();
+        //test2();
     }
     
     // Item (String name, Category category, int priority, String amount)
@@ -32,6 +32,7 @@ public class Test {
         Item cheese = new Item("Käse", food, 0, "5");
         
         shoppingList.addItem(milk);
+        shoppingList.addItem(new Item("Nusseis", food, 2, "10"));
         shoppingList.replaceItem(milk, cheese);
         shoppingList.addItem(honey);
         shoppingList.addItem(nutella);
@@ -43,6 +44,11 @@ public class Test {
         List<Item> it = shoppingList.getItems();
         for (int i = 0; i < it.size(); i++){
             System.out.println(it.get(i).toString());
+        }
+        
+        List<Item> ifi = shoppingList.filter("Nu");
+        for (int i = 0; i < ifi.size(); i++){
+            System.out.println(ifi.get(i).toString());
         }
         
     }

@@ -112,5 +112,16 @@ public class ShoppingList {
         }
     }
     
+    public List<Item> filter(String fi){
+        System.out.println("Filter: "+fi+" :");
+        List<Item> flist = new ArrayList<>();
+        for(Item fitem : items){
+            if(fitem.getName().startsWith(fi)){
+                flist.add(fitem);
+            }
+        }
+        return flist;
+    }
+    
     
 }
