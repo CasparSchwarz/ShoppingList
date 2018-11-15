@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package ShoppingList;
+
+import java.util.Comparator;
+
 /**
  *
  * @author smg
@@ -54,6 +57,10 @@ public class Item {
         this.check = check;
     }
 
+    public int getPriority() {
+        return priority;
+    }
+
     public boolean isCheck() {
         return check;
     }
@@ -67,5 +74,14 @@ public class Item {
                 + String.valueOf(amount) + seperator
                 + String.valueOf(check);
         return txtF;
+    }
+    
+    public static class PriorityComparator implements Comparator<Item>{
+
+        @Override
+        public int compare(Item o1, Item o2) {
+            return o2.getPriority() - o1.getPriority();
+        }
+    
     }
 }
