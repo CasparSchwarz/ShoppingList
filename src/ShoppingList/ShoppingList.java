@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -121,6 +122,11 @@ public class ShoppingList {
             }
         }
         return flist;
+    }
+    
+    public List<Item> pSorter(){
+        Collections.sort(items, new Item.PriorityComparator());
+        return items;
     }
     
     
