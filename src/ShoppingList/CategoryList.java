@@ -72,4 +72,8 @@ public class CategoryList {
         saveList();
     }
     
+    public void addCategoryFS(Category cat){
+        categories.add(cat);
+    }
+    
 }
