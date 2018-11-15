@@ -53,6 +53,10 @@ public class Item {
     public void setCheck(boolean check) {
         this.check = check;
     }
+
+    public boolean isCheck() {
+        return check;
+    }
     
     // Preparing of Attributes for the text file
     @Override

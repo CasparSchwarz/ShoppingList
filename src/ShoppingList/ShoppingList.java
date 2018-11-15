@@ -99,5 +99,18 @@ public class ShoppingList {
         return items;
     }
     
+    public void clear(){
+        int i = 0;
+        if(!items.isEmpty()){
+            while(items.get(i) != null){
+                if(items.get(i).isCheck()){
+                    items.remove(items.get(i));
+                }
+                i++;
+            }
+            
+        }
+    }
+    
     
 }
