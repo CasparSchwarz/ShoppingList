@@ -117,10 +117,11 @@ public class ShoppingList {
         System.out.println("Filter: "+fi+" :");
         List<Item> flist = new ArrayList<>();
         for(Item fitem : items){
-            if(fitem.getName().startsWith(fi)){
+            if(fitem.getName().toLowerCase().startsWith(fi.toLowerCase())){
                 flist.add(fitem);
             }
         }
+        Collections.sort(flist, new Item.PriorityComparator());
         return flist;
     }
     
