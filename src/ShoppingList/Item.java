@@ -13,14 +13,14 @@ import java.util.Comparator;
  */
 public class Item {
     private String name;
-    private Category category;
     private Store store;
-    private int priority;
+    private String category;
+    private boolean priority;
     private String amount;
     private String seperator;
     private boolean check;
     
-    public Item (String name, Category category, int priority, String amount){
+    public Item (String name, String category, boolean priority, String amount){
         this.name = name;
         this.category = category;
         this.priority = priority;
@@ -41,7 +41,7 @@ public class Item {
         this.name = name;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -49,7 +49,7 @@ public class Item {
         this.store = store;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(boolean priority) {
         this.priority = priority;
     }
 
@@ -57,7 +57,7 @@ public class Item {
         this.check = check;
     }
 
-    public int getPriority() {
+    public boolean getPriority() {
         return priority;
     }
 
@@ -69,19 +69,10 @@ public class Item {
     @Override
     public String toString(){
         String txtF = name + seperator 
-                + category.getName() + seperator
+                + category + seperator
                 + String.valueOf(priority)+ seperator
                 + String.valueOf(amount) + seperator
                 + String.valueOf(check);
         return txtF;
-    }
-    
-    public static class PriorityComparator implements Comparator<Item>{
-
-        @Override
-        public int compare(Item o1, Item o2) {
-            return o2.getPriority() - o1.getPriority();
-        }
-    
     }
 }

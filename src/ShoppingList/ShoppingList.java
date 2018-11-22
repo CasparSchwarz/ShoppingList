@@ -73,6 +73,10 @@ public class ShoppingList {
             System.out.println(e);
         }
     }
+
+    public String getName() {
+        return name;
+    }
     
     // Removes item from List and refreshes .txt
     public void removeItem(Item item){
@@ -87,10 +91,10 @@ public class ShoppingList {
     }
     
     // Changes Item-properties and refreshes .txt
-    public void editItem(Item item, String name, Category category, Integer priority, String amount, Boolean check){
+    public void editItem(Item item, String name, String category, boolean priority, String amount, Boolean check){
         if(name != null) item.setName(name);
         if(category != null) item.setCategory(category);
-        if(priority != null) item.setPriority(priority);
+        item.setPriority(priority);
         if(amount != null) item.setAmount(amount);
         if(check != null) item.setCheck(check);
         saveList();
@@ -121,14 +125,7 @@ public class ShoppingList {
                 flist.add(fitem);
             }
         }
-        Collections.sort(flist, new Item.PriorityComparator());
+        //Collections.sort(flist, new Item.PriorityComparator());
         return flist;
-    }
-    
-    public List<Item> pSorter(){
-        Collections.sort(items, new Item.PriorityComparator());
-        return items;
-    }
-    
-    
+    }    
 }

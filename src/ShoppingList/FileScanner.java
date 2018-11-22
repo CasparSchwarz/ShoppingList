@@ -34,7 +34,6 @@ public class FileScanner {
         }
         
         ShoppingList List1 = new ShoppingList("List1");
-        Category category = new Category("category");
         
         // StringBuilder sb = new StringBuilder();
         String letter;
@@ -46,7 +45,7 @@ public class FileScanner {
                 int i = 0;
                 int p = 0;
                 System.out.println(letter);
-                Item item = new Item(null, null, 0, null);
+                Item item = new Item(null, null, false, null);
                 List1.addItemFS(item);
                 while(i < 4 && p >= 0){
                     //System.out.print(letter.charAt(p));
@@ -57,10 +56,10 @@ public class FileScanner {
                                 item.setName(temp);
                                 break;
                             case 1:
-                                item.setCategory(category);
                                 break;
                             case 2:
-                                item.setPriority(Integer.parseInt(temp));
+                                if(temp == "true") item.setPriority(true);
+                                if(temp == "false") item.setPriority(false);
                                 break;
                             case 3:
                                 item.setAmount(temp);
@@ -85,31 +84,6 @@ public class FileScanner {
             }
             System.out.println(List1.getItems().toString());
         } catch (IOException f){
-            System.out.println(f);
-        }
-    }
-    
-    public void openCategoryList(){
-                
-        categories = new ArrayList<>();
-        try{
-            reader = new BufferedReader(new FileReader("src/CategoryList"));
-        } catch(FileNotFoundException e){
-            System.out.println(e);
-        }
-        
-        CategoryList List1 = new CategoryList();
-        
-        // StringBuilder sb = new StringBuilder();
-        String letter;
-        StringBuilder sb = new StringBuilder();
-                try{
-            while((letter = reader.readLine()) != null){
-                Category category = new Category(letter);
-                List1.addCategoryFS(category);
-            }
-            
-        }catch (IOException f){
             System.out.println(f);
         }
     }
