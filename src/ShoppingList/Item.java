@@ -65,7 +65,7 @@ public class Item {
         return check;
     }
     
-    // Preparing of Attributes for the text file
+    // Preparing of attributes for the text file
     @Override
     public String toString(){
         String txtF = name + seperator 

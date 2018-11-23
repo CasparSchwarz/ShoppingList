@@ -24,8 +24,11 @@ public class FileScanner {
     /**
      *
      */
+    
+    // Opens a ShoppingList .txt
     public void openShoppingList() {
         
+        // Creates an ArrayList for all the Items in the .txt
         items = new ArrayList<>();
         try{
             reader = new BufferedReader(new FileReader("src/saves/List1.txt"));
@@ -35,22 +38,28 @@ public class FileScanner {
         
         ShoppingList List1 = new ShoppingList("List1");
         
-        // StringBuilder sb = new StringBuilder();
+        // Create String to read the current line
         String letter;
         StringBuilder sb = new StringBuilder();
         
+        // Read each Line
         try{
             while((letter = reader.readLine()) != null){
                 String temp = "";
                 int i = 0;
+                
+                // create int p to destinguish current attribute
                 int p = 0;
-                System.out.println(letter);
                 Item item = new Item(null, null, false, null);
                 List1.addItemFS(item);
+                
+                // Checking for the seperator ";;;"
                 while(i < 4 && p >= 0){
                     //System.out.print(letter.charAt(p));
                     if(letter.charAt(p) == ';' && letter.charAt(p+1) == ';' && letter.charAt(p+2) == ';'){
                         p = p +3;
+                        
+                        // Set attributes of a certain item
                         switch (i) {
                             case 0:
                                 item.setName(temp);

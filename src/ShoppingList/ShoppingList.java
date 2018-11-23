@@ -26,11 +26,13 @@ public class ShoppingList {
     private List<Item> items;
     private PrintWriter out;
     private File list;
+    private String seperator;
     
     public ShoppingList(String name){
         this.name = name;
         this.dir = "src/saves/";
         this.fileName = dir + name + ".txt";
+        this.seperator = seperator;
         
         // Creating new dir if given dir doesn't exist, creating new file
         try{
@@ -56,6 +58,7 @@ public class ShoppingList {
         }
     }
     
+    // Adds Items to the ArrayList in FileScanner
     public void addItemFS(Item item){
         items.add(item);
     }
@@ -104,6 +107,7 @@ public class ShoppingList {
         return items;
     }
     
+    // Clearing the ArrayList from all the checked Items
     public void clear(){
         int i = 0;
         if(!items.isEmpty()){
@@ -116,7 +120,13 @@ public class ShoppingList {
             
         }
     }
+    public String toString(){
+        String txtF = name + seperator 
+                + getItems() + seperator;
+        return txtF;
+    }
     
+    // Filter Items by a certain String
     public List<Item> filter(String fi){
         System.out.println("Filter: "+fi+" :");
         List<Item> flist = new ArrayList<>();
