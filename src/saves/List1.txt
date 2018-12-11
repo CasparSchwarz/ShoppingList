@@ -1,3 +1,4 @@
-Gouda;;;Drinks;;;0;;;1;;;true
-Honig;;;Food;;;1;;;null;;;false
-Nutella;;;Food;;;0;;;3;;;false
+Nusseis;;;food;;;true;;;10;;;false
+Gouda;;;drinks;;;false;;;1;;;true
+Honig;;;food;;;true;;;null;;;false
+Nutella;;;food;;;false;;;3;;;false

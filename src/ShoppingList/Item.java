@@ -13,25 +13,55 @@ import java.util.Comparator;
  */
 public class Item {
     
-    // private String id;
+    private String id;
     private String name;
+    
     private String category;
     private String amount;
     private boolean priority;
-    // private Strin price;
+    private String price;
     private boolean check;
     
     // "überflüssig"
     private Store store;
     private String seperator;
     
-    public Item (String name, String category, boolean priority, String amount){
+    public Item (String id, String name, String category, String amount, int priority, String price, int check){
+        this.id = id;
         this.name = name;
         this.category = category;
-        this.priority = priority;
         this.amount = amount;
-        this.seperator = ";;;";
-        check = false;
+        if(priority == 1){
+            this.priority = true;
+        } else {
+            this.priority = false;
+        }
+        this.price = price;
+        this.check = check == 1;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -54,8 +84,12 @@ public class Item {
         this.store = store;
     }
 
-    public void setPriority(boolean priority) {
-        this.priority = priority;
+    public void setPriority(int priority) {
+        if(priority == 1){
+            this.priority = true;
+        } else{
+            this.priority = false;
+        }
     }
 
     public void setCheck(boolean check) {

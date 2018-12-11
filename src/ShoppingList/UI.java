@@ -124,7 +124,7 @@ public class UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        newItem = new Item(null, null, true, null);
+        newItem = new Item(null, null, null, null, 0, null, 0);
         System.out.println(newItem.toString() + " &jButton1");
         jPopupMenu1.show(jButton1, -jButton1.getWidth(), -jButton1.getHeight()*2);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -169,11 +169,11 @@ public class UI extends javax.swing.JFrame {
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         if(jCheckBox1.isSelected()) {
-            newItem.setPriority(true);
+            newItem.setPriority(1);
             System.out.println("Checkbox selected " + newItem.getPriority());
             System.out.println(newItem.toString());
         } else {
-            newItem.setPriority(false);
+            newItem.setPriority(0);
             System.out.println(newItem.toString());
         }   
     }//GEN-LAST:event_jCheckBox1ActionPerformed

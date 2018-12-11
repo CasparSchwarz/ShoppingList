@@ -8,6 +8,11 @@ package ShoppingList;
 import java.io.IOException;
 import java.util.List;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  *
  * @author caspa
@@ -15,8 +20,9 @@ import java.util.List;
 public class Test {
     
     public static void main(String[] args) throws IOException {
-        test1();
+        //test1();
         //test2();
+        sqliteTest();
     }
     
     // Item (String name, Category category, int priority, String amount)
@@ -61,5 +67,29 @@ public class Test {
         FileScanner fs = new FileScanner();
         fs.openShoppingList();
         
+    }
+    
+    public static void sqliteTest(){
+        /* 
+        *  Create a table
+        */
+        
+        // SQLite connection string
+        String url = "jdbc:sqlite:F:\\Desktop\\AASchule\\MSS\\MSS13\\Informatiik\\ShoppingList\\src\\saves";
+        
+        // Creating a new table
+        String sql = "CREATE TABLE IF NOT EXIST shoppingList (\n"
+                + " col_1 PRIMARY KEY,\n"
+                + " name text NOT NULL, \n"
+                + "capacity real\n"
+                + ");";
+        
+        try (Connection conn = DriverManager.getConnection(url);
+                Statement stmt = conn.createStatement()) {
+            
+            stmt.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
