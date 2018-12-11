@@ -20,7 +20,10 @@ import java.util.List;
  */
 public class ShoppingList {
     
+    // private String id;
     private String name;
+    
+    // "unnötig"
     private String fileName;
     private String dir;
     private List<Item> items;

@@ -12,13 +12,18 @@ import java.util.Comparator;
  * @author smg
  */
 public class Item {
+    
+    // private String id;
     private String name;
-    private Store store;
     private String category;
-    private boolean priority;
     private String amount;
-    private String seperator;
+    private boolean priority;
+    // private Strin price;
     private boolean check;
+    
+    // "überflüssig"
+    private Store store;
+    private String seperator;
     
     public Item (String name, String category, boolean priority, String amount){
         this.name = name;
