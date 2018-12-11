@@ -30,7 +30,7 @@ public class Test {
 
     public static void test1() throws IOException{
         ShoppingList shoppingList = new ShoppingList("List1");
-        Item milk = new Item("Milch", "drinks", false, null);
+        Item milk = new Item("Milch", "drinks", "", "w", 0. "w", 0);
         Item honey = new Item("Honig", "food", true, null);
         Item nutella = new Item("Nutella", "food", false, "3");
         Item cheese = new Item("Käse", "food", false, "5");
