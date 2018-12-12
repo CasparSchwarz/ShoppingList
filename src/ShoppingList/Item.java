@@ -26,7 +26,7 @@ public class Item {
     private Store store;
     private String seperator;
     
-    public Item (String id, String name, String category, String amount, int priority, String price, int check){
+    public Item (String id, String name, String category, String amount, String price , int priority, int check){
         this.id = id;
         this.name = name;
         this.category = category;

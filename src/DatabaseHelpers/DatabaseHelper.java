@@ -16,6 +16,8 @@ import javax.naming.Context;
  * @author caspa
  */
 public class DatabaseHelper {
+    public static Connection conn;
+    
     public static final String DATABASE_NAME = "Main.db";
 
     public static final String TABLE1_NAME = "sL_table";
@@ -29,24 +31,18 @@ public class DatabaseHelper {
     public static final String COL_2_3 = "ITEM_NAME";
     public static final String COL_2_4 = "ITEM_CATEGORY";
     public static final String COL_2_5 = "ITEM_AMOUNT";
-    public static final String COL_2_6 = "ITEM_PRIORITY";
-    public static final String COL_2_7 = "ITEM_PRICE";
+    public static final String COL_2_6 = "ITEM_PRICE";
+    public static final String COL_2_7 = "ITEM_PRIORITY";
     public static final String COL_2_8 = "ITEM_CHECK";
     /**
      * Connect to a database
      */
-    public static void connect(){
+    public void connect(){
         
         String url = "jdbc:sqlite:src\\saves\\test.db";
-        String shoppingLists = "CREATE TABLE " + TABLE1_NAME + " (" + COL_1_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_1_2 + " TEXT)";
-        String items = "CREATE TABLE " + TABLE2_NAME + " (" + COL_2_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_2_2  + " TEXT, "
-                + COL_2_3 + " TEXT, " + COL_2_4 + " TEXT, " + COL_2_5 + " TEXT, " + COL_2_6 + " INTEGER, " + COL_2_7 + " TEXT, " + COL_2_8 + " INTEGER)";
         
-        try (Connection conn = DriverManager.getConnection(url);
-            Statement stmt = conn.createStatement()){
-            // Create a new table
-            stmt.execute(shoppingLists);
-            stmt.execute(items);
+        try {
+            conn = DriverManager.getConnection(url);
             
             System.out.println("Connection to SQLite has been established.");
             
@@ -55,7 +51,58 @@ public class DatabaseHelper {
         }
     }
     
-    public static void main(String[] args){
-        connect();
+    public void onCreate(){
+        String shoppingLists = "CREATE TABLE " + TABLE1_NAME + " (" + COL_1_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_1_2 + " TEXT)";
+        String items = "CREATE TABLE " + TABLE2_NAME + " (" + COL_2_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_2_2  + " TEXT, "
+                + COL_2_3 + " TEXT, " + COL_2_4 + " TEXT, " + COL_2_5 + " TEXT, " + COL_2_6 + " INTEGER, " + COL_2_7 + " TEXT, " + COL_2_8 + " INTEGER)";
+        
+        try {
+        Statement stmt = conn.createStatement();
+        stmt.execute(shoppingLists);
+        stmt.execute(items);
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public void addSL(String slName){
+        String newSL = "INSERT  " + slName + "(" 
+                + COL_1_1 + ", "
+                + COL_1_2 + ") VALUES ("
+                + "INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + slName + ");";
+        
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute(newSL);
+        } catch (SQLException exe){
+            System.out.println(exe.getMessage());
+        }
+    }
+    
+    public void addItem(String shoppingList, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority){
+        String newItem = "INSERT INTO " + TABLE2_NAME + "("
+                + COL_2_1 + ", "
+                + COL_2_2 + ", "
+                + COL_2_3 + ", "
+                + COL_2_4 + ", "
+                + COL_2_5 + ", "
+                + COL_2_6 + ", "
+                + COL_2_7 + ")"
+                + "VALUES ("
+                + "INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + shoppingList + ", "
+                + itemName + ", "
+                + itemCategory + ", "
+                + itemAmount + ", "
+                + itemPrice + ", "
+                + itemPriority + ");";
+        
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute(newItem);
+        } catch (SQLException exe){
+            System.out.println(exe.getMessage());
+        }
     }
 }

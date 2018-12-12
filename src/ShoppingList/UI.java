@@ -5,6 +5,7 @@
  */
 package ShoppingList;
 
+import DatabaseHelpers.DatabaseHelper;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -14,8 +15,8 @@ import javax.swing.*;
  */
 public class UI extends javax.swing.JFrame {
     
-    final ShoppingList list1;
     private Item newItem;
+    private DatabaseHelper dbh;
 
     /**
      * Creates new form UI
@@ -30,7 +31,7 @@ public class UI extends javax.swing.JFrame {
         jPopupMenu1.add(jLabel3);
         jPopupMenu1.add(jTextField3);
         jPopupMenu1.add(jButton2);
-        list1 = new ShoppingList("");
+        dbh = new DatabaseHelper();
         //System.out.println(list1 + "Liste vor addItem");
     }
 
@@ -124,7 +125,7 @@ public class UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        newItem = new Item(null, null, null, null, 0, null, 0);
+        newItem = new Item(null, null, null, null, null, 0, 0);
         System.out.println(newItem.toString() + " &jButton1");
         jPopupMenu1.show(jButton1, -jButton1.getWidth(), -jButton1.getHeight()*2);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -150,7 +151,7 @@ public class UI extends javax.swing.JFrame {
             //list1.addItem(newItem);
             //System.out.println(list1 + "Liste nach addItem");
             //list1.replaceItem(newItem, newItem);
-            list1.addItem(newItem);
+            dbh.addItem("", "", "", "", "", 0, 0);
             System.out.println(newItem.toString());
             System.out.println(list1.toString());
         }
