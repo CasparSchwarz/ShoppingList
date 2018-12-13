@@ -16,7 +16,6 @@ import javax.naming.Context;
  * @author caspa
  */
 public class DatabaseHelper {
-    public static Connection conn;
     
     public static final String DATABASE_NAME = "Main.db";
 
@@ -34,21 +33,19 @@ public class DatabaseHelper {
     public static final String COL_2_6 = "ITEM_PRICE";
     public static final String COL_2_7 = "ITEM_PRIORITY";
     public static final String COL_2_8 = "ITEM_CHECK";
+    private String url = "jdbc:sqlite:src\\saves\\test.db";
     /**
      * Connect to a database
      */
-    public void connect(){
-        
-        String url = "jdbc:sqlite:src\\saves\\test.db";
-        
+    public Connection connect(){
+        Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
-            
             System.out.println("Connection to SQLite has been established.");
-            
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
+        return conn;
     }
     
     public void onCreate(){
@@ -57,7 +54,8 @@ public class DatabaseHelper {
                 + COL_2_3 + " TEXT, " + COL_2_4 + " TEXT, " + COL_2_5 + " TEXT, " + COL_2_6 + " INTEGER, " + COL_2_7 + " TEXT, " + COL_2_8 + " INTEGER)";
         
         try {
-        Statement stmt = conn.createStatement();
+        Connection conne = DriverManager.getConnection(url);
+        Statement stmt = conne.createStatement();
         stmt.execute(shoppingLists);
         stmt.execute(items);
         } catch (SQLException ex){
@@ -73,6 +71,7 @@ public class DatabaseHelper {
                 + slName + ");";
         
         try {
+            Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
             stmt.execute(newSL);
         } catch (SQLException exe){
@@ -99,7 +98,7 @@ public class DatabaseHelper {
                 + itemPriority + ");";
         
         try {
-            Statement stmt = conn.createStatement();
+            Statement stmt = connect().createStatement();
             stmt.execute(newItem);
         } catch (SQLException exe){
             System.out.println(exe.getMessage());

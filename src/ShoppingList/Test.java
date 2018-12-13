@@ -6,6 +6,7 @@
 package ShoppingList;
 
 import DatabaseHelpers.DatabaseHelper;
+import DatabaseHelpers.SQLOpener;
 import java.io.IOException;
 import java.util.List;
 
@@ -67,8 +68,10 @@ public class Test {
     public static void sqliteTest(){
         DatabaseHelper dbh = new DatabaseHelper();
         
-        dbh.connect();
         dbh.onCreate();
         dbh.addSL("saas");
+        SQLOpener sqlo = new SQLOpener();
+        sqlo.connect();
+        sqlo.openSL();
     }
 }

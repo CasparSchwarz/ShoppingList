@@ -43,4 +43,9 @@ public class ShoppingList {
     public void setSlID(String slId) {
         this.slID = slId;
     }
+    
+    public String toString(){
+        String out = "ID: " + slID + "name: " + name;
+        return out;
+    }
 }
