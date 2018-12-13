@@ -35,10 +35,29 @@ public class UI extends javax.swing.JFrame {
         jPopupMenu1.add(jCheckBox1);
         jPopupMenu1.add(jLabel3);
         jPopupMenu1.add(jTextField3);
-        jPopupMenu1.add(jButton2);
-        list1 = new ShoppingList("", "");
+        jPopupMenu1.add(jButtonPopupHinzufügen);
+        jPopupMenu1.add(jTextField4);
+        list1 = new ShoppingList("", "Wocheneinkauf");
         
         dbh = new DatabaseHelper();
+        
+         //print Shoppinglist  
+        model = new DefaultListModel();
+        pmodel = new DefaultListModel();
+        
+        /*model.addElement("Zucker");
+        model.addElement("Mehl");
+        model.addElement("Salz");
+        
+        pmodel.addElement("Milch");*/
+        
+        jTextFieldShoppingListName.setText(list1.getName());
+                
+        
+       //print all items at the beginning
+        jShoppingList.setModel(model);
+        System.out.println("all items at the beginning");
+        
         dbh.connect();
         //System.out.println(list1 + "Liste vor addItem");
     }
@@ -60,8 +79,13 @@ public class UI extends javax.swing.JFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jButtonPopupHinzufügen = new javax.swing.JButton();
+        jTextField4 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jCheckPriority = new javax.swing.JCheckBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jShoppingList = new javax.swing.JList<>();
+        jTextFieldShoppingListName = new javax.swing.JTextField();
 
         jLabel1.setText("Produktname");
 
@@ -96,10 +120,17 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Hinzufügen");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPopupHinzufügen.setText("Hinzufügen");
+        jButtonPopupHinzufügen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonPopupHinzufügenActionPerformed(evt);
+            }
+        });
+
+        jTextField4.setText("");
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField4KeyPressed(evt);
             }
         });
 
@@ -112,21 +143,46 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
+        jCheckPriority.setText("Priority");
+        jCheckPriority.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCheckPriorityMouseClicked(evt);
+            }
+        });
+
+        jShoppingList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jShoppingList);
+
+        jTextFieldShoppingListName.setText("Hier könnte der Name Ihrer ShoppingList stehen :)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(303, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(280, 280, 280))
+                .addGap(0, 46, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jCheckPriority)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldShoppingListName, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(563, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(438, 438, 438))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckPriority)
+                    .addComponent(jTextFieldShoppingListName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -134,7 +190,7 @@ public class UI extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         newItem = new Item(null, null, null, null, null, 0, 0);
-        System.out.println(newItem.toString() + " &jButton1");
+        System.out.println(newItem.toString() + " jButton1 pressed");
         jPopupMenu1.show(jButton1, -jButton1.getWidth(), -jButton1.getHeight()*2);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -147,24 +203,35 @@ public class UI extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_jTextField1KeyPressed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //System.out.println(jTextField1.getText());
-        //System.out.println(jTextField2.getText());
-        
+    private void jButtonPopupHinzufügenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPopupHinzufügenActionPerformed
         newItem.setName(jTextField1.getText());
         newItem.setCategory(jTextField2.getText());
         newItem.setAmount(jTextField3.getText());
+        newItem.setPrice(jTextField4.getText());
         
-        if(jTextField1.getText() != null && jTextField2.getText() != null){
-            //list1.addItem(newItem);
-            //System.out.println(list1 + "Liste nach addItem");
-            //list1.replaceItem(newItem, newItem);
-            dbh.addItem("", "", "", "", "", 0);
-            System.out.println(newItem.toString());
-            System.out.println(list1.toString());
+        System.out.println(newItem.getName());
+        System.out.println(newItem.getCategory());
+        System.out.println(newItem.getAmount());
+        System.out.println(newItem.getPrice());
+        
+        if(jTextField1.getText() != null && jTextField2.getText() != null && jTextField2.getText() != null){
+            //dbh.addItem(list1.getName(), newItem.getName(), newItem.getCategory(), newItem.getAmount(), newItem.getPrice(), 0);
+            //String shoppingList, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority
+            //dbh.addItem("", "", "", "", "", 0);
+            System.out.println("New Item: " + newItem.toString());
+            System.out.println("Inhalt Liste: " + list1.toString());
+            
+            if(jCheckBox1.isSelected()){
+                pmodel.addElement(newItem);
+            }
+            model.addElement(newItem);
         }
         jPopupMenu1.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+    }//GEN-LAST:event_jButtonPopupHinzufügenActionPerformed
 
     private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
@@ -194,7 +261,28 @@ public class UI extends javax.swing.JFrame {
             System.out.println(newItem.toString());
             }
     }//GEN-LAST:event_jTextField3KeyPressed
-    
+
+    private void jCheckPriorityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckPriorityMouseClicked
+        //print only items with priority
+        if(jCheckPriority.isSelected()){
+        jShoppingList.setModel(pmodel);
+            System.out.println("only items with priority");
+        }else{
+            jShoppingList.setModel(model);
+            System.out.println("all items");            
+        }
+
+    }//GEN-LAST:event_jCheckPriorityMouseClicked
+
+    private void jTextField4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            //System.out.println("Text Field 4 Enter Pressed");
+            System.out.println(jTextField4.getText());
+            newItem.setPrice(jTextField4.getText());
+            System.out.println(newItem.toString());
+            }
+    }//GEN-LAST:event_jTextField4KeyPressed
+                                   
     /**
      * @param args the command line arguments
      */
@@ -233,14 +321,19 @@ public class UI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonPopupHinzufügen;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckPriority;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> jShoppingList;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextFieldShoppingListName;
     // End of variables declaration//GEN-END:variables
 }
