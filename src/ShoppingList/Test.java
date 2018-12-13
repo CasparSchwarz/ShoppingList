@@ -67,7 +67,6 @@ public class Test {
     public static void sqliteTest(){
         DatabaseHelper dbh = new DatabaseHelper();
         
-        dbh.connect();
         dbh.onCreate();
         dbh.addSL("saas");
     }
