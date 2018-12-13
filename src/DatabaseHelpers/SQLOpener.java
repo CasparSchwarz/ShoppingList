@@ -7,7 +7,9 @@ package DatabaseHelpers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -26,5 +28,21 @@ public class SQLOpener {
             return null;
         }
         return conn;
+    }
+    
+    public void openSL(){
+        String sql = "SELECT SL_ID, SL_NAME from sl_TABLE";
+        
+        try(Connection conn = this.connect()){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            while(rs.next()){
+                System.out.println(rs.getString("SL_ID") + "\t" +
+                                   rs.getString("SL_NAME"));
+            }
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 }
