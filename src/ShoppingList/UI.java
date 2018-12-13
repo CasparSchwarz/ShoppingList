@@ -2,6 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+ * Shopping List new
  */
 package ShoppingList;
 
@@ -18,6 +19,9 @@ public class UI extends javax.swing.JFrame {
     private Item newItem;
     private DatabaseHelper dbh;
     private ShoppingList list1;
+    
+    private DefaultListModel model;
+    private DefaultListModel pmodel;
 
     /**
      * Creates new form UI
@@ -33,6 +37,7 @@ public class UI extends javax.swing.JFrame {
         jPopupMenu1.add(jTextField3);
         jPopupMenu1.add(jButton2);
         list1 = new ShoppingList("", "");
+        
         dbh = new DatabaseHelper();
         dbh.connect();
         //System.out.println(list1 + "Liste vor addItem");
