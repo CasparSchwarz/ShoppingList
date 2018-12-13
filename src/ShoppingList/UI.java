@@ -17,6 +17,7 @@ public class UI extends javax.swing.JFrame {
     
     private Item newItem;
     private DatabaseHelper dbh;
+    private ShoppingList list1;
 
     /**
      * Creates new form UI
@@ -31,7 +32,9 @@ public class UI extends javax.swing.JFrame {
         jPopupMenu1.add(jLabel3);
         jPopupMenu1.add(jTextField3);
         jPopupMenu1.add(jButton2);
+        list1 = new ShoppingList("", "");
         dbh = new DatabaseHelper();
+        dbh.connect();
         //System.out.println(list1 + "Liste vor addItem");
     }
 
@@ -151,12 +154,11 @@ public class UI extends javax.swing.JFrame {
             //list1.addItem(newItem);
             //System.out.println(list1 + "Liste nach addItem");
             //list1.replaceItem(newItem, newItem);
-            dbh.addItem("", "", "", "", "", 0, 0);
+            dbh.addItem("", "", "", "", "", 0);
             System.out.println(newItem.toString());
             System.out.println(list1.toString());
         }
         jPopupMenu1.setVisible(false);
-        list1.saveList();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
