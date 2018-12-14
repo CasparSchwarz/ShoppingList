@@ -39,17 +39,25 @@ public class DatabaseHelper {
     public static final String INSERT_ITEM_SQL = "INSERT INTO item_table (SL, ITEM_NAME, ITEM_CATEGORY, ITEM_AMOUNT, ITEM_PRICE, ITEM_PRIORITY)"
             + " VALUES (?, ?, ?, ?, ?, ?);";
     
+    public static final String VACUUM = "VACUUM;";
+    
     private Connection conn;
     
     public DatabaseHelper(Connection conn){
         // Connect to database
         this.conn = conn;
+        try {
+            Statement state = conn.createStatement();
+            state.execute("PRAGMA auto_vacuum = FULL;");
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
     
     // Create a table
     public void onCreate(){
-        String shoppingLists = "CREATE TABLE IF NOT EXISTS " + TABLE1_NAME + " (" + COL_1_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_1_2 + " TEXT)";
-        String items = "CREATE TABLE IF NOT EXISTS " + TABLE2_NAME + " (" + COL_2_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_2_2  + " TEXT, "
+        String shoppingLists = "CREATE TABLE IF NOT EXISTS " + TABLE1_NAME + " (" + COL_1_1 + " INTEGER PRIMARY KEY, " + COL_1_2 + " TEXT)";
+        String items = "CREATE TABLE IF NOT EXISTS " + TABLE2_NAME + " (" + COL_2_1 + " INTEGER PRIMARY KEY, " + COL_2_2  + " TEXT, "
                 + COL_2_3 + " TEXT, " + COL_2_4 + " TEXT, " + COL_2_5 + " TEXT, " + COL_2_6 + " INTEGER, " + COL_2_7 + " TEXT, " + COL_2_8 + " INTEGER)";
         
         try {
@@ -90,6 +98,7 @@ public class DatabaseHelper {
             ps.setString(4, itemAmount);
             ps.setString(5, itemPrice);
             ps.setInt(6, itemPriority);
+            ps.execute();
         } catch (SQLException exe){
             System.out.println(exe.getMessage() + "in addItem");
         }
@@ -102,6 +111,7 @@ public class DatabaseHelper {
             Statement stmt = conn.createStatement();
             stmt.execute(DELETE_SL_SQL);
             stmt.execute(DELETE_ITEM_SQL);
+            stmt.executeUpdate(VACUUM);
         } catch(SQLException e){
             System.out.println(e.getMessage() + "In deleteSL");
         }
