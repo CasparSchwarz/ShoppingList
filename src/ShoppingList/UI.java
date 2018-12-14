@@ -8,6 +8,9 @@ package ShoppingList;
 
 import DatabaseHelpers.DatabaseHelper;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import javax.swing.*;
 
 /**
@@ -39,7 +42,16 @@ public class UI extends javax.swing.JFrame {
         jPopupMenu1.add(jTextField4);
         list1 = new ShoppingList("", "Wocheneinkauf");
         
-        dbh = new DatabaseHelper();
+        // Automatically connects to db
+        String url = "jdbc:sqlite:src\\saves\\Main.db";
+        Connection conn = null;
+        // Set up connection
+        try{
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        dbh = new DatabaseHelper(conn);
         
          //print Shoppinglist  
         model = new DefaultListModel();
@@ -57,8 +69,6 @@ public class UI extends javax.swing.JFrame {
        //print all items at the beginning
         jShoppingList.setModel(model);
         System.out.println("all items at the beginning");
-        
-        dbh.connect();
         //System.out.println(list1 + "Liste vor addItem");
     }
 
