@@ -95,7 +95,23 @@ public class DatabaseHelper {
         }
     }
     
-    public void deleteSL(int id){
-        String DELETE_SL_SQL = "DELETE FROM sl_table WHERE"
+    public void deleteSL(String id){
+        String DELETE_SL_SQL = "DELETE FROM sl_table WHERE SL_ID = " + id + ";";
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute(DELETE_SL_SQL);
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void deleteItem(String id){
+        String DELETE_ITEM_SQL = "DELETE FROM item_table WHERE ITEM_ID = " + id + ";";
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute(DELETE_ITEM_SQL);
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 }
