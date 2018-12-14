@@ -16,33 +16,42 @@ import java.sql.Statement;
  * @author smg
  */
 public class SQLOpener {
-    private String url = "jdbc:sqlite:src\\saves\\test.db";
+    private Connection conn;
     
-    public Connection connect(){
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(url);
-            System.out.println("Connection to SQLite has been established.");
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-            return null;
-        }
-        return conn;
+    public static final String OPEN_SL_SQL =  "SELECT SL_ID, SL_NAME FROM sl_TABLE ORDER BY SL_ID;";
+    public static final String OPEN_ITEM_SQL = "SELECT ITEM_ID, SL, ITEM_NAME, ITEM_CATEGORY, ITEM_AMOUNT, ITEM_PRICE, ITEM_PRIORITY, ITEM_CHECK FROM item_table ODER BY ITEM_ID;";
+    
+    public SQLOpener(Connection conn){
+        // Connect to databse
+        this.conn = conn;
     }
     
+    // Print values of ShoppingList table
     public void openSL(){
-        String sql = "SELECT SL_ID, SL_NAME from sl_TABLE";
-        
-        try(Connection conn = this.connect()){
+        try{
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery(OPEN_SL_SQL);
             
             while(rs.next()){
                 System.out.println(rs.getString("SL_ID") + "\t" +
-                                   rs.getString("SL_NAME"));
+                        rs.getString("SL_NAME"));
             }
         } catch(SQLException e){
             System.out.println(e.getMessage());
+        }
+    }
+    
+    public void openItem()throws SQLException {
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(OPEN_ITEM_SQL);
+        
+        while(rs.next()){
+            System.out.println(rs.getString("ITEM_ID")+ "\t" 
+                    + rs.getString("ITEM_NAME") + "\t" 
+                    + rs.getString("ITEM_AMOUNT") + "\t" 
+                    + rs.getString("ITEM_PRICE") + "\t" 
+                    + rs.getString("ITEM_PRIORITY") + "\t" 
+                    + rs.getString("ITEM_CHECK"));
         }
     }
 }
