@@ -36,8 +36,8 @@ public class DatabaseHelper {
     public static final String COL_2_8 = "ITEM_CHECK";
     
     public static final String INSERT_SL_SQL = "INSERT INTO sl_table (SL_NAME) VALUES (?);";
-    public static final String INSERT_ITEM_SQL = "INSERT INTO item_table (SL, ITEM_NAME, ITEM_CATEGORY, ITEM_AMOUNT, ITEM_PRIORITY)"
-            + " VALUES (?, ?, ?, ?, ?, ?";
+    public static final String INSERT_ITEM_SQL = "INSERT INTO item_table (SL, ITEM_NAME, ITEM_CATEGORY, ITEM_AMOUNT, ITEM_PRICE, ITEM_PRIORITY)"
+            + " VALUES (?, ?, ?, ?, ?, ?);";
     
     private Connection conn;
     
@@ -97,9 +97,11 @@ public class DatabaseHelper {
     
     public void deleteSL(String id){
         String DELETE_SL_SQL = "DELETE FROM sl_table WHERE SL_ID = " + id + ";";
+        String DELETE_ITEM_SQL = "DELETE FROM item_table WHERE SL = " + id + ";";
         try {
             Statement stmt = conn.createStatement();
             stmt.execute(DELETE_SL_SQL);
+            stmt.execute(DELETE_ITEM_SQL);
         } catch(SQLException e){
             System.out.println(e.getMessage() + "In deleteSL");
         }
