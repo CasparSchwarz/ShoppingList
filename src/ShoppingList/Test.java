@@ -66,12 +66,18 @@ public class Test {
 //    }
     
     public static void sqliteTest(){
-        DatabaseHelper dbh = new DatabaseHelper();
+        String url = "jdbc:sqlite:src\\saves\\Main.db";
+        try {
+        Connection conn = DriverManager.getConnection(url);
+        DatabaseHelper dbh = new DatabaseHelper(conn);
         
         dbh.onCreate();
-        dbh.addSL("saas");
-        SQLOpener sqlo = new SQLOpener();
-        sqlo.connect();
+        dbh.addSL("test");
+        dbh.addSL("test2");
+        SQLOpener sqlo = new SQLOpener(conn);
         sqlo.openSL();
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 }
