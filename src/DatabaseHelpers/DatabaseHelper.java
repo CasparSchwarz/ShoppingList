@@ -60,7 +60,7 @@ public class DatabaseHelper {
             
             System.out.println("List created");
         } catch (SQLException ex){
-            System.out.println(ex.getMessage());
+            System.out.println(ex.getMessage() + "in onCreate");
         }
     }
     
@@ -75,7 +75,7 @@ public class DatabaseHelper {
             
             System.out.println("ShoppingList added");
         } catch (SQLException exe){
-            System.out.println(exe.getMessage());
+            System.out.println(exe.getMessage() + "in addSL");
         }
     }
     
@@ -91,7 +91,7 @@ public class DatabaseHelper {
             ps.setString(5, itemPrice);
             ps.setInt(6, itemPriority);
         } catch (SQLException exe){
-            System.out.println(exe.getMessage());
+            System.out.println(exe.getMessage() + "in addItem");
         }
     }
     
@@ -101,7 +101,7 @@ public class DatabaseHelper {
             Statement stmt = conn.createStatement();
             stmt.execute(DELETE_SL_SQL);
         } catch(SQLException e){
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + "In deleteSL");
         }
     }
     
@@ -111,7 +111,7 @@ public class DatabaseHelper {
             Statement stmt = conn.createStatement();
             stmt.execute(DELETE_ITEM_SQL);
         } catch(SQLException e){
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + "In deleteItem");
         }
     }
 }

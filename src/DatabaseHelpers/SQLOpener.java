@@ -19,7 +19,7 @@ public class SQLOpener {
     private Connection conn;
     
     public static final String OPEN_SL_SQL =  "SELECT SL_ID, SL_NAME FROM sl_TABLE ORDER BY SL_ID;";
-    public static final String OPEN_ITEM_SQL = "SELECT ITEM_ID, SL, ITEM_NAME, ITEM_CATEGORY, ITEM_AMOUNT, ITEM_PRICE, ITEM_PRIORITY, ITEM_CHECK FROM item_table ODER BY ITEM_ID;";
+    public static final String OPEN_ITEM_SQL = "SELECT ITEM_ID, SL, ITEM_NAME, ITEM_CATEGORY, ITEM_AMOUNT, ITEM_PRICE, ITEM_PRIORITY, ITEM_CHECK FROM item_table ORDER BY ITEM_ID;";
     
     public SQLOpener(Connection conn){
         // Connect to databse
@@ -27,8 +27,8 @@ public class SQLOpener {
     }
     
     // Print values of ShoppingList table
-    public void openSL(){
-        try{
+    public void openSL() throws SQLException {
+        
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(OPEN_SL_SQL);
             
@@ -36,9 +36,6 @@ public class SQLOpener {
                 System.out.println(rs.getString("SL_ID") + "\t" +
                         rs.getString("SL_NAME"));
             }
-        } catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
     }
     
     public void openItem()throws SQLException {

@@ -72,12 +72,15 @@ public class Test {
         DatabaseHelper dbh = new DatabaseHelper(conn);
         
         dbh.onCreate();
-        dbh.addSL("test");
+        dbh.addSL("Einkauf");
         dbh.addSL("test2");
+        dbh.deleteSL("25");
+        dbh.addItem("1", "Milch", "Drinks", "Drei Tetrapacks", "5€", 1);
         SQLOpener sqlo = new SQLOpener(conn);
         sqlo.openSL();
+        sqlo.openItem();
         } catch (SQLException e){
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + "in sqliteTest");
         }
     }
 }
