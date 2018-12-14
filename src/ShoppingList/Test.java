@@ -74,7 +74,7 @@ public class Test {
         dbh.onCreate();
         dbh.addSL("Einkauf");
         dbh.addSL("test2");
-        dbh.deleteSL("4");
+        dbh.deleteSL("3");
         dbh.addItem("1", "Milch", "Drinks", "Drei Tetrapacks", "5€", 1);
         dbh.addItem("26", "Nutella", "Food", "50 Gläser", "4€", 1);
         SQLOpener sqlo = new SQLOpener(conn);

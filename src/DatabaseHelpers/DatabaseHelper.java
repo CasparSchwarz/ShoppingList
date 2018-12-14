@@ -46,12 +46,6 @@ public class DatabaseHelper {
     public DatabaseHelper(Connection conn){
         // Connect to database
         this.conn = conn;
-        try {
-            Statement state = conn.createStatement();
-            state.execute("PRAGMA auto_vacuum = FULL;");
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
     }
     
     // Create a table
@@ -80,7 +74,6 @@ public class DatabaseHelper {
             ps.setString(1, slName);
             ps.execute();
             ps.close();
-            
             System.out.println("ShoppingList added");
         } catch (SQLException exe){
             System.out.println(exe.getMessage() + "in addSL");
@@ -111,7 +104,6 @@ public class DatabaseHelper {
             Statement stmt = conn.createStatement();
             stmt.execute(DELETE_SL_SQL);
             stmt.execute(DELETE_ITEM_SQL);
-            stmt.executeUpdate(VACUUM);
         } catch(SQLException e){
             System.out.println(e.getMessage() + "In deleteSL");
         }
