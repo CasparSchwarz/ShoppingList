@@ -7,6 +7,7 @@ package DatabaseHelpers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.naming.Context;
@@ -33,75 +34,68 @@ public class DatabaseHelper {
     public static final String COL_2_6 = "ITEM_PRICE";
     public static final String COL_2_7 = "ITEM_PRIORITY";
     public static final String COL_2_8 = "ITEM_CHECK";
-    private String url = "jdbc:sqlite:src\\saves\\test.db";
-    /**
-     * Connect to a database
-     */
-    public Connection connect(){
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(url);
-            System.out.println("Connection to SQLite has been established.");
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-        return conn;
+    
+    public static final String INSERT_SL_SQL = "INSERT INTO sl_table (SL_NAME) VALUES (?);";
+    public static final String INSERT_ITEM_SQL = "INSERT INTO item_table (SL, ITEM_NAME, ITEM_CATEGORY, ITEM_AMOUNT, ITEM_PRIORITY)"
+            + " VALUES (?, ?, ?, ?, ?, ?";
+    
+    private Connection conn;
+    
+    public DatabaseHelper(Connection conn){
+        // Connect to database
+        this.conn = conn;
     }
     
+    // Create a table
     public void onCreate(){
-        String shoppingLists = "CREATE TABLE " + TABLE1_NAME + " (" + COL_1_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_1_2 + " TEXT)";
-        String items = "CREATE TABLE " + TABLE2_NAME + " (" + COL_2_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_2_2  + " TEXT, "
+        String shoppingLists = "CREATE TABLE IF NOT EXISTS " + TABLE1_NAME + " (" + COL_1_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_1_2 + " TEXT)";
+        String items = "CREATE TABLE IF NOT EXISTS " + TABLE2_NAME + " (" + COL_2_1 + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_2_2  + " TEXT, "
                 + COL_2_3 + " TEXT, " + COL_2_4 + " TEXT, " + COL_2_5 + " TEXT, " + COL_2_6 + " INTEGER, " + COL_2_7 + " TEXT, " + COL_2_8 + " INTEGER)";
         
         try {
-        Connection conne = DriverManager.getConnection(url);
-        Statement stmt = conne.createStatement();
-        stmt.execute(shoppingLists);
-        stmt.execute(items);
+            Statement stmt = conn.createStatement();
+            stmt.execute(shoppingLists);
+            stmt.execute(items);
+            stmt.close();
+            
+            System.out.println("List created");
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
         }
     }
     
+    // Add a ShoppingList
     public void addSL(String slName){
-        String newSL = "INSERT  " + slName + "(" 
-                + COL_1_1 + ", "
-                + COL_1_2 + ") VALUES ("
-                + "INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + slName + ");";
-        
+        PreparedStatement ps = null;
         try {
-            Connection conn = DriverManager.getConnection(url);
-            Statement stmt = conn.createStatement();
-            stmt.execute(newSL);
+            ps = this.conn.prepareStatement(INSERT_SL_SQL);
+            ps.setString(1, slName);
+            ps.execute();
+            ps.close();
+            
+            System.out.println("ShoppingList added");
         } catch (SQLException exe){
             System.out.println(exe.getMessage());
         }
     }
     
+    // Add an Item
     public void addItem(String shoppingList, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority){
-        String newItem = "INSERT INTO " + TABLE2_NAME + "("
-                + COL_2_1 + ", "
-                + COL_2_2 + ", "
-                + COL_2_3 + ", "
-                + COL_2_4 + ", "
-                + COL_2_5 + ", "
-                + COL_2_6 + ", "
-                + COL_2_7 + ")"
-                + "VALUES ("
-                + "INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + shoppingList + ", "
-                + itemName + ", "
-                + itemCategory + ", "
-                + itemAmount + ", "
-                + itemPrice + ", "
-                + itemPriority + ");";
-        
+        PreparedStatement ps = null;
         try {
-            Statement stmt = connect().createStatement();
-            stmt.execute(newItem);
+            ps = this.conn.prepareStatement(INSERT_ITEM_SQL);
+            ps.setString(1, shoppingList);
+            ps.setString(2, itemName);
+            ps.setString(3, itemCategory);
+            ps.setString(4, itemAmount);
+            ps.setString(5, itemPrice);
+            ps.setInt(6, itemPriority);
         } catch (SQLException exe){
             System.out.println(exe.getMessage());
         }
+    }
+    
+    public void deleteSL(int id){
+        String DELETE_SL_SQL = "DELETE FROM sl_table WHERE"
     }
 }
