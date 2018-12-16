@@ -1,4 +1,0 @@
-Nusseis;;;food;;;true;;;10;;;false
-Gouda;;;drinks;;;false;;;1;;;true
-Honig;;;food;;;true;;;null;;;false
-Nutella;;;food;;;false;;;3;;;false
