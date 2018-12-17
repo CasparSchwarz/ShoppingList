@@ -16,7 +16,7 @@ public class SQLOpener {
         this.conn = conn;
     }
     
-    // Print values of ShoppingList table
+    // Print values from the ShoppingList table
     public void openSL() throws SQLException {
         
             Statement stmt = conn.createStatement();
@@ -28,6 +28,7 @@ public class SQLOpener {
             }
     }
     
+    // Print values from the Items table
     public void openItem()throws SQLException {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(OPEN_ITEM_SQL);
