@@ -1,16 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
-import java.util.Comparator;
-
-/**
- *
- * @author smg
- */
 public class Item {
     
     private String id;
@@ -28,11 +17,9 @@ public class Item {
         this.name = name;
         this.category = category;
         this.amount = amount;
-        if(priority == 1){
-            this.priority = true;
-        } else {
-            this.priority = false;
-        }
+        
+        this.priority = priority == 1;
+        
         this.price = price;
         this.check = check == 1;
     }
