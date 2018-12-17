@@ -1,89 +1,110 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package models;
 
-public class Item {
+import java.util.Comparator;
 
+/**
+ *
+ * @author smg
+ */
+public class Item {
     
     private String id;
     private String name;
     
-    
     private String category;
     private String amount;
-    private String priority;
+    private boolean priority;
     private String price;
     private boolean check;
-
-    public Item (String id, String name, String category, String amount, String priority, String price, int intCheck){
+    private String seperator;
+    
+    public Item (String id, String name, String category, String amount, String price , int priority, int check){
         this.id = id;
         this.name = name;
         this.category = category;
         this.amount = amount;
-        this.priority = priority;
-        this.price = price;
-        if(intCheck == 1){
-            this.check = true;
+        if(priority == 1){
+            this.priority = true;
         } else {
-            this.check = false;
+            this.priority = false;
         }
+        this.price = price;
+        this.check = check == 1;
     }
 
-    public String getId(){
-        return id;
-    }
-
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public String getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    public String getPriority() {
-        return priority;
-    }
-
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
-
-    public String getPrice(){
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(String price){
-        this.price = price;
+    public String getId() {
+        return id;
     }
 
-    public boolean isCheck() {
-        return check;
+    public String getName() {
+        return name;
+    }
+    
+    public void setAmount(String amount){
+        this.amount = amount;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setPriority(int priority) {
+        if(priority == 1){
+            this.priority = true;
+        } else{
+            this.priority = false;
+        }
     }
 
     public void setCheck(boolean check) {
         this.check = check;
     }
 
+    public boolean getPriority() {
+        return priority;
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+    
+    // Preparing of attributes for the text file
+    @Override
     public String toString(){
-        return System.getProperty("line.separator") + "Name: " + name + " Category: " + category + " Amount: " + amount + " Priority: " + priority + " Checked: " + check;
+        String txtF = name + seperator 
+                + category + seperator
+                + String.valueOf(priority)+ seperator
+                + String.valueOf(amount) + seperator
+                + String.valueOf(check);
+        return txtF;
     }
 }
