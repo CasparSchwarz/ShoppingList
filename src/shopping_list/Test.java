@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ShoppingList;
+package shopping_list;
 
-import DatabaseHelpers.DatabaseHelper;
-import DatabaseHelpers.SQLOpener;
+import database_helpers.DatabaseHelper;
+import database_helpers.SQLOpener;
 import java.io.IOException;
 import java.util.List;
 

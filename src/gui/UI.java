@@ -1,22 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- * Shopping List new
- */
-package ShoppingList;
+package gui;
 
-import DatabaseHelpers.DatabaseHelper;
+import models.Item;
+import models.ShoppingList;
+import database_helpers.DatabaseHelper;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.*;
 
-/**
- *
- * @author dorie
- */
 public class UI extends javax.swing.JFrame {
     
     private Item newItem;
