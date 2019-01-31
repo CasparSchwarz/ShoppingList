@@ -27,11 +27,12 @@ public class UI extends javax.swing.JFrame {
         jPopupMenu1.add(jTextField1);
         jPopupMenu1.add(jLabel2);
         jPopupMenu1.add(jTextField2);
-        jPopupMenu1.add(jCheckBox1);
         jPopupMenu1.add(jLabel3);
         jPopupMenu1.add(jTextField3);
-        jPopupMenu1.add(jButtonPopupHinzufügen);
+        jPopupMenu1.add(jLabel4);
         jPopupMenu1.add(jTextField4);
+        jPopupMenu1.add(jCheckBox1);
+        jPopupMenu1.add(jButtonPopupHinzufügen);
         list1 = new ShoppingList("", "Wocheneinkauf");
         
         // Automatically connects to db
@@ -82,6 +83,7 @@ public class UI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jButtonPopupHinzufügen = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jCheckPriority = new javax.swing.JCheckBox();
@@ -129,6 +131,8 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Preis");
+
         jTextField4.setText("");
         jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -165,7 +169,9 @@ public class UI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addGap(63, 63, 63))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,15 +217,7 @@ public class UI extends javax.swing.JFrame {
         newItem.setAmount(jTextField3.getText());
         newItem.setPrice(jTextField4.getText());
         
-        System.out.println(newItem.getName());
-        System.out.println(newItem.getCategory());
-        System.out.println(newItem.getAmount());
-        System.out.println(newItem.getPrice());
-        
         if(jTextField1.getText() != null && jTextField2.getText() != null && jTextField2.getText() != null){
-            //dbh.addItem(list1.getName(), newItem.getName(), newItem.getCategory(), newItem.getAmount(), newItem.getPrice(), 0);
-            //String shoppingList, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority
-            //dbh.addItem("", "", "", "", "", 0);
             System.out.println("New Item: " + newItem.toString());
             System.out.println("Inhalt Liste: " + list1.toString());
             
@@ -228,11 +226,13 @@ public class UI extends javax.swing.JFrame {
             }
             model.addElement(newItem);
         }
+        dbh.addItem("1", jTextField1.getText(), jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), newItem.getPriority());
         jPopupMenu1.setVisible(false);
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
         jTextField4.setText("");
+        
     }//GEN-LAST:event_jButtonPopupHinzufügenActionPerformed
 
     private void jTextField2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyPressed
@@ -329,6 +329,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> jShoppingList;
