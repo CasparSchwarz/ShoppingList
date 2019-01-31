@@ -49,12 +49,7 @@ public class UI extends javax.swing.JFrame {
          //print Shoppinglist  
         model = new DefaultListModel();
         pmodel = new DefaultListModel();
-        
-        /*model.addElement("Zucker");
-        model.addElement("Mehl");
-        model.addElement("Salz");
-        
-        pmodel.addElement("Milch");*/
+  
         
         jTextFieldShoppingListName.setText(list1.getName());
                 
@@ -116,7 +111,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Anzahl");
+        jLabel3.setText("Menge");
 
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -131,7 +126,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Preis");
+        jLabel4.setText("Preis (€)");
 
         jTextField4.setText("");
         jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -164,6 +159,11 @@ public class UI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jShoppingList);
 
         jTextFieldShoppingListName.setText("Hier könnte der Name Ihrer ShoppingList stehen :)");
+        jTextFieldShoppingListName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldShoppingListNameActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -232,6 +232,7 @@ public class UI extends javax.swing.JFrame {
         jTextField2.setText("");
         jTextField3.setText("");
         jTextField4.setText("");
+        jCheckBox1.setSelected(false);
         
     }//GEN-LAST:event_jButtonPopupHinzufügenActionPerformed
 
@@ -284,6 +285,10 @@ public class UI extends javax.swing.JFrame {
             System.out.println(newItem.toString());
             }
     }//GEN-LAST:event_jTextField4KeyPressed
+
+    private void jTextFieldShoppingListNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldShoppingListNameActionPerformed
+        //save 
+    }//GEN-LAST:event_jTextFieldShoppingListNameActionPerformed
                                    
     /**
      * @param args the command line arguments
