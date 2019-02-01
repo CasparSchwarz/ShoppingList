@@ -7,9 +7,9 @@ public class Item {
     
     private String category;
     private String amount;
-    private boolean priority;
+    private int priority;
     private String price;
-    private boolean check;
+    private int check;
     private String seperator;
     
     public Item (String id, String name, String category, String amount, String price , int priority, int check){
@@ -18,10 +18,10 @@ public class Item {
         this.category = category;
         this.amount = amount;
         
-        this.priority = priority == 1;
+        this.priority = priority;
         
         this.price = price;
-        this.check = check == 1;
+        this.check = check;
     }
 
     public void setId(String id) {
@@ -65,22 +65,18 @@ public class Item {
     }
 
     public void setPriority(int priority) {
-        if(priority == 1){
-            this.priority = true;
-        } else{
-            this.priority = false;
-        }
+        this.priority = priority;
     }
 
-    public void setCheck(boolean check) {
+    public void setCheck(int check) {
         this.check = check;
     }
 
-    public boolean getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    public boolean isCheck() {
+    public int getCheck() {
         return check;
     }
     

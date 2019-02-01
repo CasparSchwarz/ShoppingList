@@ -107,4 +107,8 @@ public class DatabaseHelper {
             System.out.println(e.getMessage() + "In deleteItem");
         }
     }
+    
+    public void updateItem(String id, String shoppingList, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority){
+        //String UPDATE_ITEM_SQL = "UPDATE item_table SET "
+    }
 }

@@ -4,6 +4,8 @@ import database_helpers.DatabaseHelper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import models.Item;
+import models.ShoppingList;
 
 public class Service {
     private DatabaseHelper dh;
@@ -18,7 +20,19 @@ public class Service {
         dh.addSL(name);
     }
     
-    public void addItem(String name){
+    public void addItem(ShoppingList sl, Item item){
+        dh.addItem(sl.getName(), item.getName(), item.getCategory(), item.getAmount(), item.getPrice(), item.getPriority());
+    }
+    
+    public void deleteSL(String id){
+        dh.deleteSL(id);
+    }
+    
+    public void deleteItem(String id){
+        dh.deleteItem(id);
+    }
+    
+    public void check(String id){
         
     }
 }
