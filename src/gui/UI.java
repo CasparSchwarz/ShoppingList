@@ -85,6 +85,7 @@ public class UI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jShoppingList = new javax.swing.JList<>();
         jTextFieldShoppingListName = new javax.swing.JTextField();
+        jButtonDelete = new javax.swing.JButton();
 
         jLabel1.setText("Produktname");
 
@@ -165,30 +166,38 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
+        jButtonDelete.setText("Delete");
+        jButtonDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonDeleteMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addGap(63, 63, 63))
+            .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 46, Short.MAX_VALUE)
+                .addGap(0, 57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckPriority)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldShoppingListName, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jTextFieldShoppingListName, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckPriority)
-                    .addComponent(jTextFieldShoppingListName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldShoppingListName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonDelete))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -289,6 +298,14 @@ public class UI extends javax.swing.JFrame {
     private void jTextFieldShoppingListNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldShoppingListNameActionPerformed
         //save 
     }//GEN-LAST:event_jTextFieldShoppingListNameActionPerformed
+
+    private void jButtonDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonDeleteMouseClicked
+        int selectedIndex = jShoppingList.getSelectedIndex();
+        if (selectedIndex != -1) {
+            model.remove(selectedIndex);
+            dbh.deleteItem(id);
+            }
+    }//GEN-LAST:event_jButtonDeleteMouseClicked
                                    
     /**
      * @param args the command line arguments
@@ -328,6 +345,7 @@ public class UI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonPopupHinzufügen;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckPriority;
