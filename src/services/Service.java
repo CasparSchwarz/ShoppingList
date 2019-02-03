@@ -33,7 +33,11 @@ public class Service {
     }
     
     public void check(String id){
-        
+        dh.updateItem(id, null, null, null, null, null, 2, 1);
+    }
+    
+    public void update(String id, String sl, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority){
+        dh.updateItem(id, sl, itemName, itemCategory, itemAmount, itemPrice, itemPriority, 2);
     }
 }
     

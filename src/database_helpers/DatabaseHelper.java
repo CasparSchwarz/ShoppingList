@@ -2,6 +2,7 @@ package database_helpers;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -108,7 +109,38 @@ public class DatabaseHelper {
         }
     }
     
-    public void updateItem(String id, String shoppingList, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority){
-        //String UPDATE_ITEM_SQL = "UPDATE item_table SET "
+    public void updateItem(String id, String shoppingList, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority, int itemCheck){
+        try{
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT ITEM_ID, SL, ITEM_NAME, ITEM_CATEGORY, ITEM_AMOUNT, ITEM_PRICE, ITEM_PRIORITY, ITEM_CHECK FROM item_table WHERE " + id);
+            
+            if(shoppingList == null){
+                shoppingList = rs.getString("SL");
+            } if (itemName == null){
+                itemName = rs.getString("ITEM_NAME");
+            } if (itemCategory == null){
+                itemCategory = rs.getString("ITEM_CATEGORY");
+            } if (itemAmount == null){
+                itemAmount = rs.getString("ITEM_AMOUNT");
+            } if (itemPrice == null){
+                itemPrice = rs.getString("ITEM_PRICE");
+            } if (itemPriority == 2){
+                itemPriority = Integer.valueOf(rs.getString("ITEM_PRIORITY"));
+            } if (itemCheck == 2){
+                itemCheck = Integer.valueOf(rs.getString("ITEM_CHECK"));
+            }
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        String UPDATE_ITEM_SQL = "UPDATE item_table SET"
+                + " SL = " + shoppingList
+                + " ITEM_NAME = " + itemName
+                + " ITEM_CATEGORY = " + itemCategory
+                + " ITEM_AMOUNT = " + itemAmount
+                + " ITEM_PRICE = " + itemPrice
+                + " ITEM_PRIORITY = " + itemPriority
+                + " ITEM_CHECK = " + itemCheck
+                + " WHERE ITEM_ID = " + id;
     }
 }
