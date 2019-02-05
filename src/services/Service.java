@@ -39,5 +39,7 @@ public class Service {
     public void update(String id, String sl, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority){
         dh.updateItem(id, sl, itemName, itemCategory, itemAmount, itemPrice, itemPriority, 2);
     }
+    
+    
 }
     

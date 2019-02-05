@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import models.Item;
+import services.Service;
 
 public class Test {
     
@@ -72,5 +74,11 @@ public class Test {
         } catch (SQLException e){
             System.out.println(e.getMessage() + "in sqliteTest");
         }
+    }
+    
+    public static void serviceTest() throws SQLException{
+        Service s = new Service();
+        s.connect();
+        Item nutella = new Item("0", "Nutella", "Essen", "15 Gläser", "2€", 1, 0);
     }
 }
