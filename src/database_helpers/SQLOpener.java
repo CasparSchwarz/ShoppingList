@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import models.Item;
 import models.ShoppingList;
 
 public class SQLOpener {
@@ -21,16 +22,16 @@ public class SQLOpener {
     // Print values from the ShoppingList table
     public void openSL() throws SQLException {
         ArrayList shoppingLists = new ArrayList();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(OPEN_SL_SQL);
-            int i = 0;
-            ShoppingList sl;
-            while(rs.next()){
-                System.out.println(rs.getString("SL_ID") + "\t" +
-                        rs.getString("SL_NAME"));
-                shoppingLists.add(i, sl = new ShoppingList(rs.getString("SL_ID"), rs.getString("SL_NAME")));
-                i++;
-            }
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(OPEN_SL_SQL);
+        int i = 0;
+        ShoppingList sl;
+        while(rs.next()){
+            System.out.println(rs.getString("SL_ID") + "\t" +
+                    rs.getString("SL_NAME"));
+            shoppingLists.add(i, sl = new ShoppingList(rs.getString("SL_ID"), rs.getString("SL_NAME")));
+            i++;
+        }
     }
     
     // Print values from the Items table
@@ -38,13 +39,25 @@ public class SQLOpener {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(OPEN_ITEM_SQL);
         
+        ArrayList itemList = new ArrayList();
+        Item item;
+        int i = 0;
         while(rs.next()){
             System.out.println(rs.getString("ITEM_ID")+ "\t" 
-                    + rs.getString("ITEM_NAME") + "\t" 
+                    + rs.getString("ITEM_NAME") + "\t"
+                    + rs.getString("ITEM_CATEGORY") + "\t"
                     + rs.getString("ITEM_AMOUNT") + "\t" 
                     + rs.getString("ITEM_PRICE") + "\t" 
                     + rs.getString("ITEM_PRIORITY") + "\t" 
                     + rs.getString("ITEM_CHECK"));
+            itemList.add(i, item = new Item(rs.getString("ITEM_ID"),
+                rs.getString("ITEM_NAME"),
+                rs.getString("ITEM_CATEGORY"),
+                rs.getString("ITEM_AMOUNT"),
+                rs.getString("ITEM_PRICE"),
+                Integer.valueOf(rs.getString("ITEM_PRIORITY")),
+                Integer.valueOf(rs.getString("ITEM_CHECK"))));
+            i++;
         }
     }
 }
