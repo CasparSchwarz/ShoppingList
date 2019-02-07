@@ -5,6 +5,7 @@ import database_helpers.SQLOpener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import models.Item;
 import models.ShoppingList;
 
@@ -47,6 +48,14 @@ public class Service {
     public void print() throws SQLException{
         so.openSL();
         so.openItem();
+    }
+    
+    public ArrayList<Item> getItems() throws SQLException{
+        return so.openItem();
+    }
+    
+    public ArrayList<ShoppingList> getSL() throws SQLException{
+        return so.openSL();
     }
 }
     
