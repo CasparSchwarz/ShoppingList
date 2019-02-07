@@ -260,8 +260,7 @@ public class UI extends javax.swing.JFrame {
 
     // Edits shoppinglistname in UI head
     private void jTextFieldShoppingListNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextFieldShoppingListNameMouseClicked
-        list1.setName("");
-        System.out.println(list1.getName());
+        jTextFieldShoppingListName.setText("");
     }//GEN-LAST:event_jTextFieldShoppingListNameMouseClicked
                                    
     /**
