@@ -14,6 +14,7 @@ public class Service {
     public void connect() throws SQLException{
         Connection conn = DriverManager.getConnection(url);
         dh = new DatabaseHelper(conn);
+        dh.onCreate();
     }
     
     public void addSL(String name){
