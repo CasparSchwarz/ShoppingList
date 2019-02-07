@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.*;
+import services.Service;
 
 public class UI extends javax.swing.JFrame {
     
@@ -35,16 +36,13 @@ public class UI extends javax.swing.JFrame {
         jPopupMenu1.add(jButtonPopupHinzufügen);
         list1 = new ShoppingList("", "Wocheneinkauf");
         
-        // Automatically connects to db
-        String url = "jdbc:sqlite:src\\saves\\Main.db";
-        Connection conn = null;
-        // Set up connection
-        try{
-            conn = DriverManager.getConnection(url);
+        // Use Service to establish connection to db
+        Service s = new Service();
+        try {
+            s.connect();
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
-        dbh = new DatabaseHelper(conn);
         
          //print Shoppinglist  
         model = new DefaultListModel();
@@ -303,7 +301,7 @@ public class UI extends javax.swing.JFrame {
         int selectedIndex = jShoppingList.getSelectedIndex();
         if (selectedIndex != -1) {
             model.remove(selectedIndex);
-            dbh.deleteItem(id);
+            //dbh.deleteItem(id);
             }
     }//GEN-LAST:event_jButtonDeleteMouseClicked
                                    
