@@ -12,7 +12,7 @@ import models.ShoppingList;
 public class Service {
     private DatabaseHelper dh;
     private SQLOpener so;
-    String url = "jdbc:sqlite:src\\saves\\Main.db";
+    String url = "jdbc:sqlite:src/saves/Main.db";
     
     public void connect() throws SQLException{
         Connection conn = DriverManager.getConnection(url);

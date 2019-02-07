@@ -65,7 +65,7 @@ public class Test {
 //    }
     
     public static void sqliteTest(){
-        String url = "jdbc:sqlite:src\\saves\\Main.db";
+        String url = "jdbc:sqlite:src/saves/Main.db";
         try {
         Connection conn = DriverManager.getConnection(url);
         DatabaseHelper dbh = new DatabaseHelper(conn);
