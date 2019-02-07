@@ -20,8 +20,8 @@ public class SQLOpener {
     }
     
     // Print values from the ShoppingList table
-    public void openSL() throws SQLException {
-        ArrayList shoppingLists = new ArrayList();
+    public ArrayList<ShoppingList> openSL() throws SQLException {
+        ArrayList<ShoppingList> shoppingLists = new ArrayList();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(OPEN_SL_SQL);
         int i = 0;
@@ -32,14 +32,15 @@ public class SQLOpener {
             shoppingLists.add(i, sl = new ShoppingList(rs.getString("SL_ID"), rs.getString("SL_NAME")));
             i++;
         }
+        return shoppingLists;
     }
     
     // Print values from the Items table
-    public void openItem()throws SQLException {
+    public ArrayList<Item> openItem()throws SQLException {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(OPEN_ITEM_SQL);
         
-        ArrayList itemList = new ArrayList();
+        ArrayList<Item> itemList = new ArrayList();
         Item item;
         int i = 0;
         while(rs.next()){
@@ -59,5 +60,6 @@ public class SQLOpener {
                 Integer.valueOf(rs.getString("ITEM_CHECK"))));
             i++;
         }
+        return itemList;
     }
 }
