@@ -16,6 +16,9 @@ private static final int SORT_BY_CATEGORY = 1;
  private int lastSortedBy;
  private String lastSearchedBy;
     
+    public Organize(){
+        
+    }
     
     public void sortItems(int id){
         if (id == SORT_BY_NAME) {
