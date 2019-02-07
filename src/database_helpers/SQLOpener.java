@@ -21,7 +21,7 @@ public class SQLOpener {
     
     // Print values from the ShoppingList table
     public ArrayList<ShoppingList> openSL() throws SQLException {
-        ArrayList<ShoppingList> shoppingLists = new ArrayList();
+        ArrayList<ShoppingList> shoppingLists = new ArrayList<>();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(OPEN_SL_SQL);
         int i = 0;
@@ -40,7 +40,7 @@ public class SQLOpener {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(OPEN_ITEM_SQL);
         
-        ArrayList<Item> itemList = new ArrayList();
+        ArrayList<Item> itemList = new ArrayList<>();
         Item item;
         int i = 0;
         while(rs.next()){
@@ -56,8 +56,8 @@ public class SQLOpener {
                 rs.getString("ITEM_CATEGORY"),
                 rs.getString("ITEM_AMOUNT"),
                 rs.getString("ITEM_PRICE"),
-                Integer.valueOf(rs.getString("ITEM_PRIORITY")),
-                Integer.valueOf(rs.getString("ITEM_CHECK"))));
+                rs.getInt("ITEM_PRIORITY"),
+                rs.getInt("ITEM_CHECK")));
             i++;
         }
         return itemList;

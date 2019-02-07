@@ -1,6 +1,7 @@
 package services;
 
 import database_helpers.DatabaseHelper;
+import database_helpers.SQLOpener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -9,12 +10,14 @@ import models.ShoppingList;
 
 public class Service {
     private DatabaseHelper dh;
+    private SQLOpener so;
     String url = "jdbc:sqlite:src\\saves\\Main.db";
     
     public void connect() throws SQLException{
         Connection conn = DriverManager.getConnection(url);
         dh = new DatabaseHelper(conn);
         dh.onCreate();
+        so = new SQLOpener(conn);
     }
     
     public void addSL(String name){
@@ -41,6 +44,9 @@ public class Service {
         dh.updateItem(id, sl, itemName, itemCategory, itemAmount, itemPrice, itemPriority, 2);
     }
     
-    
+    public void print() throws SQLException{
+        so.openSL();
+        so.openItem();
+    }
 }
     

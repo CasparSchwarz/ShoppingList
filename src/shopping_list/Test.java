@@ -7,15 +7,23 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Item;
+import models.ShoppingList;
 import services.Service;
 
 public class Test {
     
     public static void main(String[] args) throws IOException {
-        //test1();
-        //test2();
-        sqliteTest();
+        try {
+            //test1();
+            //test2();
+            //sqliteTest();
+            serviceTest();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
     
     // Item (String name, Category category, int priority, String amount)
@@ -80,5 +88,8 @@ public class Test {
         Service s = new Service();
         s.connect();
         Item nutella = new Item("0", "Nutella", "Essen", "15 Gläser", "2€", 1, 0);
+        ShoppingList sl = new ShoppingList("0", "ShoppingList");
+        s.addItem(sl, nutella);
+        s.print();
     }
 }

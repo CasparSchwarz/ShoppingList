@@ -82,6 +82,8 @@ public class DatabaseHelper {
             ps.setString(5, itemPrice);
             ps.setInt(6, itemPriority);
             ps.execute();
+            ps.close();
+            System.out.println("Item added");
         } catch (SQLException exe){
             System.out.println(exe.getMessage() + "in addItem");
         }
