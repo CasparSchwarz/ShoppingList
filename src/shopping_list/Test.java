@@ -88,8 +88,10 @@ public class Test {
         Service s = new Service();
         s.connect();
         Item nutella = new Item("0", "Nutella", "Essen", "15 Gläser", "2€", 1, 0);
+        Item Erdnussbutter = new Item("0", "Erdnussbutter", "Essen", "30 Gläser", "50€", 1, 0);
         ShoppingList sl = new ShoppingList("0", "ShoppingList");
         s.addItem(sl, nutella);
+        s.addItem(sl, Erdnussbutter);
         s.print();
     }
 }

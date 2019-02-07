@@ -38,7 +38,7 @@ public class DatabaseHelper {
         this.conn = conn;
     }
     
-    // Create a table
+    // Create the tables
     public void onCreate(){
         String shoppingLists = "CREATE TABLE IF NOT EXISTS " + TABLE1_NAME + " (" + COL_1_1 + " INTEGER PRIMARY KEY, " + COL_1_2 + " TEXT)";
         String items = "CREATE TABLE IF NOT EXISTS " + TABLE2_NAME + " (" + COL_2_1 + " INTEGER PRIMARY KEY, " + COL_2_2  + " TEXT, "
@@ -56,7 +56,7 @@ public class DatabaseHelper {
         }
     }
     
-    // Add a ShoppingList
+    // Add a ShoppingList to table
     public void addSL(String slName){
         PreparedStatement ps = null;
         try {
@@ -70,7 +70,7 @@ public class DatabaseHelper {
         }
     }
     
-    // Add an Item
+    // Add an Item to table
     public void addItem(String shoppingList, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority){
         PreparedStatement ps = null;
         try {
@@ -89,6 +89,7 @@ public class DatabaseHelper {
         }
     }
     
+    // Delete one ShoppingList from table
     public void deleteSL(String id){
         String DELETE_SL_SQL = "DELETE FROM sl_table WHERE SL_ID = " + id + ";";
         String DELETE_ITEM_SQL = "DELETE FROM item_table WHERE SL = " + id + ";";
@@ -101,6 +102,7 @@ public class DatabaseHelper {
         }
     }
     
+    // Delete one Item from table
     public void deleteItem(String id){
         String DELETE_ITEM_SQL = "DELETE FROM item_table WHERE ITEM_ID = " + id + ";";
         try {
@@ -111,6 +113,7 @@ public class DatabaseHelper {
         }
     }
     
+    // Update an Item in the table
     public void updateItem(String id, String shoppingList, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority, int itemCheck){
         try{
             Statement stmt = conn.createStatement();

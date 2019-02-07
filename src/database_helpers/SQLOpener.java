@@ -19,7 +19,7 @@ public class SQLOpener {
         this.conn = conn;
     }
     
-    // Print values from the ShoppingList table
+    // Return values as ArrayList from table and print them
     public ArrayList<ShoppingList> openSL() throws SQLException {
         ArrayList<ShoppingList> shoppingLists = new ArrayList<>();
         Statement stmt = conn.createStatement();
@@ -35,7 +35,6 @@ public class SQLOpener {
         return shoppingLists;
     }
     
-    // Print values from the Items table
     public ArrayList<Item> openItem()throws SQLException {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(OPEN_ITEM_SQL);
