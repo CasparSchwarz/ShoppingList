@@ -89,11 +89,9 @@ public class Item {
     // Preparing of attributes for the text file
     @Override
     public String toString(){
-        String txtF = name + seperator 
-                + category + seperator
-                + String.valueOf(priority)+ seperator
-                + String.valueOf(amount) + seperator
-                + String.valueOf(check);
+        String txtF = amount
+                + "   "
+                + String.valueOf(name);
         return txtF;
     }
 }
