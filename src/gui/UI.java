@@ -17,6 +17,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.*;
+import services.DBService;
 import services.Service;
 
 public class UI extends javax.swing.JFrame {
@@ -65,7 +66,7 @@ public class UI extends javax.swing.JFrame {
         list1 = new ShoppingList("", "list1");
         
         // Uses Service to establish connection to db
-        Service s = new Service();
+        DBService s = new DBService();
         try {
             s.connect();
         } catch (SQLException e){

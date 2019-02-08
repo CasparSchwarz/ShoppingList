@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Item;
 import models.ShoppingList;
+import services.DBService;
 import services.Service;
 
 public class Test {
@@ -85,13 +86,15 @@ public class Test {
     }
     
     public static void serviceTest() throws SQLException{
-        Service s = new Service();
+        DBService s = new DBService();
         s.connect();
         Item nutella = new Item("0", "Nutella", "Essen", "15 Gläser", "2€", 1, 0);
         Item Erdnussbutter = new Item("0", "Erdnussbutter", "Essen", "30 Gläser", "50€", 1, 0);
         ShoppingList sl = new ShoppingList("0", "ShoppingList");
         s.addItem(sl, nutella);
         s.addItem(sl, Erdnussbutter);
+        s.getItems();
+        s.getSL();
         s.print();
     }
 }
