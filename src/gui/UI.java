@@ -10,6 +10,8 @@ package gui;
 import models.Item;
 import models.ShoppingList;
 import database_helpers.DatabaseHelper;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,12 +30,25 @@ public class UI extends javax.swing.JFrame {
     private DefaultListModel model;
     // Creates list model without priority for jlist
     private DefaultListModel pmodel;
+    
+    private Dimension screenSize;
 
     /**
      * Creates new form UI
      */
     public UI() {
+                
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        System.out.println(screenSize);
+        
+        int width = screenSize.width /2 - 200;
+        int height = screenSize.height /2 - 325;
+        
+        this.setLocation(width, height);
+        
+        
         initComponents();
+
         //add functions to popupmenu
         jPopupMenu1.add(jLabelItemName);
         jPopupMenu1.add(jTextFieldItemName);
@@ -125,6 +140,7 @@ public class UI extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(400, 650));
 
         jButtonAddItem.setText("+");
         jButtonAddItem.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +150,8 @@ public class UI extends javax.swing.JFrame {
         });
 
         jCheckPriority.setText("Priority");
+        jCheckPriority.setMaximumSize(new java.awt.Dimension(70, 25));
+        jCheckPriority.setMinimumSize(new java.awt.Dimension(70, 25));
         jCheckPriority.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jCheckPriorityMouseClicked(evt);
@@ -155,6 +173,8 @@ public class UI extends javax.swing.JFrame {
         });
 
         jButtonDelete.setText("Delete");
+        jButtonDelete.setMaximumSize(new java.awt.Dimension(70, 25));
+        jButtonDelete.setMinimumSize(new java.awt.Dimension(70, 25));
         jButtonDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonDeleteMouseClicked(evt);
@@ -167,28 +187,30 @@ public class UI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 57, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonDelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckPriority)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldShoppingListName, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonAddItem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckPriority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldShoppingListName, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButtonAddItem, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckPriority)
+                    .addComponent(jCheckPriority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldShoppingListName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonDelete))
+                    .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAddItem, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        getAccessibleContext().setAccessibleName("jFrame");
+        getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -207,8 +229,9 @@ public class UI extends javax.swing.JFrame {
         newItem.setPrice(jTextFieldItemPrice.getText());
         
         // If itemname is set: add element to model
-        if(jTextFieldItemName.getText() != null) {
+        if(jTextFieldItemName.getText() != null && jTextFieldItemAmount.getText() != null) {
             
+            System.out.println("itemname not set");
             model.addElement(newItem);
             
             if(jCheckBoxItemPriority.isSelected()) {
