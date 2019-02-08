@@ -2,6 +2,8 @@ package services;
 
 import database_helpers.DatabaseHelper;
 import database_helpers.SQLOpener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,10 +14,18 @@ import models.ShoppingList;
 public class Service {
     private DatabaseHelper dh;
     private SQLOpener so;
-    String url = "jdbc:sqlite:src/saves/Main.db";
+    String path = "src/saves/Main.db";
+    String url = "jdbc:sqlite:" + path;
     
     // Establish connection to Main.db via DbH & SQLO
     public void connect() throws SQLException{
+        File db = new File(path);
+        try{
+            db.getParentFile().mkdirs();
+            db.createNewFile();
+        } catch (IOException ex){
+            System.out.println(ex);
+        }
         Connection conn = DriverManager.getConnection(url);
         dh = new DatabaseHelper(conn);
         dh.onCreate();
