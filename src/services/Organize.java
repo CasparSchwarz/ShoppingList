@@ -65,7 +65,7 @@ private static final int SORT_BY_CATEGORY = 1;
        
     }
     
-    public static void filter(String rein){
+    public static void filter(CharSequence rein){
         
     }
                                              
