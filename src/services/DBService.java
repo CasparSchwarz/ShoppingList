@@ -59,26 +59,26 @@ public class DBService extends Service{
     
     // Delete one ShoppingList
     @Override
-    public void deleteSL(String id){
-        dh.deleteSL(id);
+    public void deleteSL(ShoppingList SL){
+        dh.deleteSL(SL.getSlID());
     }
     
     // Delete one Item
     @Override
-    public void deleteItem(String id){
-        dh.deleteItem(id);
+    public void deleteItem(Item item){
+        dh.deleteItem(item.getId());
     }
     
     // Set check to 1
     @Override
-    public void check(String id){
-        dh.updateItem(id, null, null, null, null, null, 2, 1);
+    public void check(Item item){
+        dh.updateItem(item.getId(), null, null, null, null, null, 2, 1);
     }
     
     // Update one Item
     @Override
-    public void update(String id, String sl, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority){
-        dh.updateItem(id, sl, itemName, itemCategory, itemAmount, itemPrice, itemPriority, 2);
+    public void update(Item item, String sl, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority){
+        dh.updateItem(item.getId(), sl, itemName, itemCategory, itemAmount, itemPrice, itemPriority, 2);
     }
     
     // Print out all ShoppingLists and Items

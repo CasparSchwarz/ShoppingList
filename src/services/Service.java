@@ -30,21 +30,19 @@ public abstract class Service {
     public abstract void addItem(ShoppingList sl, Item item);
     
     // Delete one ShoppingList
-    public abstract void deleteSL(String id);
+    public abstract void deleteSL(ShoppingList SL);
     
     // Delete one Item
-    public abstract void deleteItem(String id);
+    public abstract void deleteItem(Item item);
     
     // Set check to 1
-    public abstract void check(String id);
+    public abstract void check(Item item);
     
     // Update one Item
-    public abstract void update(String id, String sl, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority);
+    public abstract void update(Item item, String sl, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority);
     
     // Return an ArrayList containing all Items
-    public ArrayList<Item> getItems() throws SQLException{
-        return so.openItem();
-    }
+    public abstract ArrayList<Item> getItems() throws SQLException;
     
     // Return an ArrayList returning all ShoppingLists
     public abstract ArrayList<ShoppingList> getSL() throws SQLException;
