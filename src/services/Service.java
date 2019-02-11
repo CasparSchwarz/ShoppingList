@@ -47,6 +47,15 @@ public abstract class Service {
     // Return an ArrayList returning all ShoppingLists
     public abstract ArrayList<ShoppingList> getSL() throws SQLException;
     
+    // Get ShoppingLists ArrayList
+    public ArrayList<ShoppingList> getSList(){
+        return so.getSList();
+    }
+    
+    // Get ItemLists
+    public ArrayList<Item> getItemList(){
+        return so.getItem();
+    }
     // Print all ShoppingLists and Items
     public abstract void print();
 }

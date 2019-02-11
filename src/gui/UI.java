@@ -67,11 +67,7 @@ public class UI extends javax.swing.JFrame {
         
         // Uses Service to establish connection to db
         DBService s = new DBService();
-        try {
-            s.connect();
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
+        s.connect();
         
         // Creates listmodel
         model = new DefaultListModel();

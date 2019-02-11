@@ -31,7 +31,7 @@ public class DBService extends Service{
     
     // Establish connection to Main.db via DbH & SQLO
     @Override
-    public void connect() throws SQLException{
+    public void connect(){
         File db = new File(path);
         try{
             db.getParentFile().mkdirs();
@@ -39,10 +39,14 @@ public class DBService extends Service{
         } catch (IOException ex){
             System.out.println(ex);
         }
-        Connection conn = DriverManager.getConnection(url);
-        dh = new DatabaseHelper(conn);
-        dh.onCreate();
-        so = new SQLOpener(conn);
+        try {
+            Connection conn = DriverManager.getConnection(url);
+            dh = new DatabaseHelper(conn);
+            dh.onCreate();
+            so = new SQLOpener(conn);
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
     
     // Add a ShoppingList

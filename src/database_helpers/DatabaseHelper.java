@@ -148,4 +148,8 @@ public class DatabaseHelper {
                 + " ITEM_CHECK = " + itemCheck
                 + " WHERE ITEM_ID = " + id;
     }
+    
+    public String getSLID(String SLName){
+        return null;
+    }
 }
