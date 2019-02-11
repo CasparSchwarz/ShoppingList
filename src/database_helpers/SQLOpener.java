@@ -54,6 +54,14 @@ public class SQLOpener {
         return itemList;
     }
     
+    public ArrayList<ShoppingList> getSList(){
+        return shoppingLists;
+    }
+    
+    public ArrayList<Item> getItem(){
+        return itemList;
+    }
+    
     public void printItemList(){
         for(int i = 0; i < itemList.size(); i++){
             System.out.println(itemList.get(i).getId() + "\t"
