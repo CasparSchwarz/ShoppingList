@@ -32,7 +32,8 @@ public class UI extends javax.swing.JFrame {
     // Creates list model without priority for jlist
     private DefaultListModel pmodel;
     
-    private Dimension screenSize;
+    private int screenWidth;
+    private int screenHeight;
 
     /**
      * Creates new form UI
@@ -42,11 +43,10 @@ public class UI extends javax.swing.JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         System.out.println(screenSize);
         
-        int width = screenSize.width /2 - 200;
-        int height = screenSize.height /2 - 325;
+        this.screenWidth = screenSize.width /2 - 200;
+        this.screenHeight = screenSize.height /2 - 325;
         
-        this.setLocation(width, height);
-        
+        this.setLocation(screenWidth, screenHeight);        
         
         initComponents();
 
@@ -215,7 +215,7 @@ public class UI extends javax.swing.JFrame {
     // Opens popupmenu and sets parameters to null
     private void jButtonAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddItemActionPerformed
         newItem = new Item(null, null, null, null, null, 0, 0);
-        jPopupMenu1.show(jButtonAddItem, -jButtonAddItem.getWidth(), -jButtonAddItem.getHeight()*2);
+        jPopupMenu1.show(jButtonAddItem, -98 +jButtonAddItem.getWidth() , -234+jButtonAddItem.getHeight());
     }//GEN-LAST:event_jButtonAddItemActionPerformed
 
     // Reads all textfields and replaces parameters
@@ -239,7 +239,7 @@ public class UI extends javax.swing.JFrame {
         //addItem(String shoppingList, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority)
         
         //System.out.println(newItem);
-        //s.addItem(list1, newItem);
+        
         //s.addItem(list1, jTextFieldItemName.getText(), jTextFieldItemCategory.getText(), jTextFieldItemAmount.getText(), jTextFieldItemPrice.getText(), newItem.getPriority());
         
         // Resets textfields to null, unchecks priority and closes popupmenu
