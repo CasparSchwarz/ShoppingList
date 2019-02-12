@@ -225,18 +225,21 @@ public class UI extends javax.swing.JFrame {
         newItem.setAmount(jTextFieldItemAmount.getText());
         newItem.setPrice(jTextFieldItemPrice.getText());
         
-        // If itemname is set: add element to model
-        if(jTextFieldItemName.getText() != null && jTextFieldItemAmount.getText() != null) {
-            
-            System.out.println("itemname not set");
+        // Checks, wheter name and amount ar inserted or not
+        if(!newItem.getName().isEmpty() && !newItem.getAmount().isEmpty()) {
             model.addElement(newItem);
-            
-            if(jCheckBoxItemPriority.isSelected()) {
-                pmodel.addElement(newItem);
-            
-            }
+        } else {
+            System.out.println("Error occured, please insert name and amount");
         }
         
+        if(jCheckBoxItemPriority.isSelected()) {
+                pmodel.addElement(newItem);
+            }
+        
+        //addItem(String shoppingList, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority)
+        
+        //System.out.println(newItem);
+        //s.addItem(list1, newItem);
         //s.addItem(list1, jTextFieldItemName.getText(), jTextFieldItemCategory.getText(), jTextFieldItemAmount.getText(), jTextFieldItemPrice.getText(), newItem.getPriority());
         
         // Resets textfields to null, unchecks priority and closes popupmenu
