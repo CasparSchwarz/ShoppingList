@@ -26,6 +26,7 @@ public class UI extends javax.swing.JFrame {
     private Item newItem;
     private Service s;
     private ShoppingList list1;
+    private DatabaseHelper dh1;
     
     // Creates list model with priority for jlist
     private DefaultListModel model;
@@ -41,7 +42,6 @@ public class UI extends javax.swing.JFrame {
     public UI() {
                 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        System.out.println(screenSize);
         
         this.screenWidth = screenSize.width /2 - 200;
         this.screenHeight = screenSize.height /2 - 325;
@@ -63,11 +63,12 @@ public class UI extends javax.swing.JFrame {
         jPopupMenu1.add(jButtonPopupHinzufügen);
         
         // Initializes shoppinglist to add items 
-        list1 = new ShoppingList("", "list1");
+        list1 = new ShoppingList("1", "list1");
         
         // Uses Service to establish connection to db
         DBService s = new DBService();
         s.connect();
+        s.addSL("list1");
         
         // Creates listmodel
         model = new DefaultListModel();
@@ -225,7 +226,7 @@ public class UI extends javax.swing.JFrame {
         newItem.setAmount(jTextFieldItemAmount.getText());
         newItem.setPrice(jTextFieldItemPrice.getText());
         
-        // Checks, wheter name and amount ar inserted or not
+        // Checks, wheter name and amount are inserted or not
         if(!newItem.getName().isEmpty() && !newItem.getAmount().isEmpty()) {
             model.addElement(newItem);
         } else {
