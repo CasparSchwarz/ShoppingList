@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 public class DatabaseHelper {
     
+    // Preparing SQL Statements
     public static final String DATABASE_NAME = "Main.db";
 
     public static final String TABLE1_NAME = "sL_table";
@@ -28,8 +29,6 @@ public class DatabaseHelper {
     public static final String INSERT_SL_SQL = "INSERT INTO sl_table (SL_NAME) VALUES (?);";
     public static final String INSERT_ITEM_SQL = "INSERT INTO item_table (SL, ITEM_NAME, ITEM_CATEGORY, ITEM_AMOUNT, ITEM_PRICE, ITEM_PRIORITY)"
             + " VALUES (?, ?, ?, ?, ?, ?);";
-    
-    public static final String VACUUM = "VACUUM;";
     
     private Connection conn;
     
