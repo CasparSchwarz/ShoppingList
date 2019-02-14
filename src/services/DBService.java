@@ -44,6 +44,7 @@ public class DBService extends Service{
             dh = new DatabaseHelper(conn);
             dh.onCreate();
             so = new SQLOpener(conn);
+            System.out.println("CONNECTION ESTABLISHED");
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
