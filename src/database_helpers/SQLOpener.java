@@ -90,16 +90,17 @@ public class SQLOpener {
     
     public String getItemID(String name){
         String id = null;
-        String query = "SELECT ITEM_ID FROM item_table WHERE " + name;
+        String query = "SELECT ITEM_ID, SL, ITEM_NAME, ITEM_CATEGORY, ITEM_AMOUNT, ITEM_PRICE, ITEM_PRIORITY, ITEM_CHECK FROM item_table WHERE " + name;
         Statement stmt;
         try {
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            id = rs.getString("ITEM_ID");
+            id = Integer.toString(rs.getInt("ITEM_ID"));
+            System.out.println("ITEM ID ID: " + Integer.toString(rs.getInt("ITEM_ID")));
         } catch (SQLException ex) {
-            Logger.getLogger(ex.getMessage());
+            System.out.println(ex.getMessage());
         }
-        
+        System.out.println("DIE ID: " + id);
         return id;
     }
     
@@ -110,7 +111,7 @@ public class SQLOpener {
         try {
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            id = rs.getString("SL_ID");
+            id = Integer.toString(rs.getInt("SL_ID"));
         } catch (SQLException ex){
             System.out.println(ex.getMessage());
         }
