@@ -96,5 +96,6 @@ public class Test {
         s.getItems();
         s.getSL();
         s.print();
+        System.out.println("ITEM ID: " + nutella.getId());
     }
 }

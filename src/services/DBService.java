@@ -60,6 +60,7 @@ public class DBService extends Service{
     @Override
     public void addItem(ShoppingList sl, Item item){
         dh.addItem(sl.getName(), item.getName(), item.getCategory(), item.getAmount(), item.getPrice(), item.getPriority());
+        item.setId(so.getItemID(item.getName()));
     }
     
     // Delete one ShoppingList
