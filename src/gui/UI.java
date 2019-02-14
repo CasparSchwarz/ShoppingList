@@ -26,11 +26,10 @@ public class UI extends javax.swing.JFrame {
     private Item newItem;
     private Service s;
     private ShoppingList list1;
-    private DatabaseHelper dh1;
     
-    // Creates list model with priority for jlist
+    // Creates list model for jlist
     private DefaultListModel model;
-    // Creates list model without priority for jlist
+    // Creates list model wit priority for jlist
     private DefaultListModel pmodel;
     
     private int screenWidth;
@@ -237,12 +236,6 @@ public class UI extends javax.swing.JFrame {
                 pmodel.addElement(newItem);
             }
         
-        //addItem(String shoppingList, String itemName, String itemCategory, String itemAmount, String itemPrice, int itemPriority)
-        
-        //System.out.println(newItem);
-        
-        //s.addItem(list1, jTextFieldItemName.getText(), jTextFieldItemCategory.getText(), jTextFieldItemAmount.getText(), jTextFieldItemPrice.getText(), newItem.getPriority());
-        
         // Resets textfields to null, unchecks priority and closes popupmenu
         jPopupMenu1.setVisible(false);
         jTextFieldItemName.setText("");
@@ -278,7 +271,6 @@ public class UI extends javax.swing.JFrame {
         int selectedIndex = jShoppingList.getSelectedIndex();
         if (selectedIndex != -1) {
             model.remove(selectedIndex);
-            //dbh.deleteItem(id);
             }
     }//GEN-LAST:event_jButtonDeleteMouseClicked
 
