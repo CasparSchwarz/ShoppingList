@@ -9,7 +9,7 @@ import models.Item;
 import models.ShoppingList;
 
 public class SQLOpener {
-    private Connection conn;
+    private final Connection conn;
     // Preparing SQL Statements
     public static final String OPEN_SL_SQL =  "SELECT SL_ID, SL_NAME FROM sl_TABLE ORDER BY SL_ID;";
     public static final String OPEN_ITEM_SQL = "SELECT ITEM_ID, SL, ITEM_NAME, ITEM_CATEGORY, ITEM_AMOUNT, ITEM_PRICE, ITEM_PRIORITY, ITEM_CHECK FROM item_table ORDER BY ITEM_ID;";

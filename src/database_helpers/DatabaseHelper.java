@@ -30,7 +30,7 @@ public class DatabaseHelper {
     public static final String INSERT_ITEM_SQL = "INSERT INTO item_table (SL, ITEM_NAME, ITEM_CATEGORY, ITEM_AMOUNT, ITEM_PRICE, ITEM_PRIORITY)"
             + " VALUES (?, ?, ?, ?, ?, ?);";
     
-    private Connection conn;
+    private final Connection conn;
     
     public DatabaseHelper(Connection conn){
         // Connect to database

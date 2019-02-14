@@ -2,10 +2,6 @@ package services;
 
 import database_helpers.DatabaseHelper;
 import database_helpers.SQLOpener;
-import java.io.File;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Item;
@@ -16,9 +12,6 @@ public abstract class Service {
     private SQLOpener so;
     String path = "src/saves/Main.db";
     String url = "jdbc:sqlite:" + path;
-    
-    private boolean isSL = false;
-    private boolean isItem = false;
     
     // Establish connection to Main.db via DbH & SQLO
     public abstract void connect() throws SQLException;

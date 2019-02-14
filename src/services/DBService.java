@@ -29,7 +29,7 @@ public class DBService extends Service{
     private boolean isSL = false;
     private boolean isItem = false;
     
-    // Establish connection to Main.db via DbH & SQLO
+    // Establish connection to Main.db via DBH & SQLO
     @Override
     public void connect(){
         File db = new File(path);
