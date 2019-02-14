@@ -2,13 +2,8 @@ package gui;
 
 import models.Item;
 import models.ShoppingList;
-import database_helpers.DatabaseHelper;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import javax.swing.*;
 import services.DBService;
 import services.Service;
