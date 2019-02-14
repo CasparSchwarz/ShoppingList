@@ -1,10 +1,3 @@
-/*if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            //System.out.println("Text Field 2 Enter Pressed");
-            System.out.println(jTextFieldItemCategory.getText());
-            newItem.setCategory(jTextFieldItemCategory.getText());
-            System.out.println(newItem.toString());
-            }*/
-
 package gui;
 
 import models.Item;
