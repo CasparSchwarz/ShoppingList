@@ -26,6 +26,7 @@ public class UI extends javax.swing.JFrame {
     /**
      * Creates new form UI
      */
+    @SuppressWarnings("unchecked")
     public UI() {
                 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -207,6 +208,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAddItemActionPerformed
 
     // Reads all textfields and replaces parameters
+    @SuppressWarnings("unchecked")
     private void jButtonPopupHinzufügenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPopupHinzufügenActionPerformed
         newItem.setName(jTextFieldItemName.getText());
         newItem.setCategory(jTextFieldItemCategory.getText());
@@ -244,6 +246,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBoxItemPriorityActionPerformed
 
     // Decides which listmodel to show (located in UI head)
+    @SuppressWarnings("unchecked")
     private void jCheckPriorityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckPriorityMouseClicked
         // Prints only items with priority
         if(jCheckPriority.isSelected()) {
