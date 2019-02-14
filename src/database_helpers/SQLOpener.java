@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Item;
 import models.ShoppingList;
 
@@ -84,5 +86,34 @@ public class SQLOpener {
             System.out.println(shoppingLists.get(i).getSlID() + "\t"
                 + shoppingLists.get(i).getName());
         }
+    }
+    
+    public String getItemID(String name){
+        String id = null;
+        String query = "SELECT ITEM_ID FROM item_table WHERE " + name;
+        Statement stmt;
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            id = rs.getString("ITEM_ID");
+        } catch (SQLException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+        
+        return id;
+    }
+    
+    public String getSLID(String name){
+        String id = null;
+        String query = "SELECT SL_ID FROM sl_table WHERE " + name;
+        Statement stmt;
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            id = rs.getString("SL_ID");
+        } catch (SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return id;
     }
 }
