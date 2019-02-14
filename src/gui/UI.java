@@ -203,7 +203,7 @@ public class UI extends javax.swing.JFrame {
     // Opens popupmenu and sets parameters to null
     private void jButtonAddItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddItemActionPerformed
         newItem = new Item(null, null, null, null, null, 0, 0);
-        jPopupMenu1.show(jButtonAddItem, -98 +jButtonAddItem.getWidth() , -234+jButtonAddItem.getHeight());
+        jPopupMenu1.show(jButtonAddItem, -104 +jButtonAddItem.getWidth() , -224+jButtonAddItem.getHeight());
     }//GEN-LAST:event_jButtonAddItemActionPerformed
 
     // Reads all textfields and replaces parameters
