@@ -1,6 +1,7 @@
 
 package services;
 
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.ArrayList;
@@ -61,13 +62,53 @@ private static final int SORT_BY_CATEGORY = 1;
                 return o1.getCheck() - o2.getCheck();
             }
         });
+        
 
        
     }
     
-    public static void filter(CharSequence rein){
+    public void filter(CharSequence rein) throws SQLException{
+        DBService db = new DBService();
+        db.connect();
+        ArrayList<Item> out = new ArrayList<>();
+        ArrayList<LItem> a = createLiList(rein,db.getItems());
+        for(int i = 0; i < a.size() ;i++){
+            out.add(a.get(i).getItem());
+        }
         
+        
+        for(int j = 0; j < out.size(); j++){
+            System.out.println(out.get(j).getId() + "\t"
+                + out.get(j).getName() + "\t"
+                + out.get(j).getCategory() + "\t"
+                + out.get(j).getAmount() + "\t"
+                + out.get(j).getPrice() + "\t"
+                + Integer.toString(out.get(j).getPriority()) + "\t"
+                + Integer.toString(out.get(j).getCheck()));
+        }
     }
+    
+        public ArrayList<LItem> createLiList(CharSequence in,ArrayList<Item> i){
+        ArrayList<LItem> a = new ArrayList<>();
+        
+        for (int b = 0; b < i.size(); b++) {
+            a.add( new LItem(i.get(b),Organize.computeLevenshteinDistance(in, i.get(b).getName())));
+        }
+        
+        Collections.sort(a, new Comparator<LItem>() {
+            @Override
+            public int compare(LItem o1, LItem o2) {
+                return o1.getLd() - o2.getLd();
+            }
+        });
+                
+                
+        return a;
+        
+        
+
+    }
+    
                                              
     private static int minimum(int a, int b, int c) {                            
             return Math.min(Math.min(a, b), c);                                      
