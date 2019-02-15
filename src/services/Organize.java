@@ -67,6 +67,7 @@ private static final int SORT_BY_CATEGORY = 1;
        
     }
     
+    //filter the shoppinglist after CharSequence "rein"
     public void filter(CharSequence rein) throws SQLException{
         DBService db = new DBService();
         db.connect();
@@ -75,7 +76,6 @@ private static final int SORT_BY_CATEGORY = 1;
         for(int i = 0; i < a.size() ;i++){
             out.add(a.get(i).getItem());
         }
-        
         
         for(int j = 0; j < out.size(); j++){
             System.out.println(out.get(j).getId() + "\t"
@@ -88,7 +88,9 @@ private static final int SORT_BY_CATEGORY = 1;
         }
     }
     
-        public ArrayList<LItem> createLiList(CharSequence in,ArrayList<Item> i){
+    //convert ArrayList into LiList (List with additional attribute of ld)[ld = distance between the Item.name and the 
+    //CharSequence "in"
+    public ArrayList<LItem> createLiList(CharSequence in,ArrayList<Item> i){
         ArrayList<LItem> a = new ArrayList<>();
         
         for (int b = 0; b < i.size(); b++) {
@@ -102,19 +104,17 @@ private static final int SORT_BY_CATEGORY = 1;
             }
         });
                 
-                
         return a;
         
-        
-
     }
     
-                                             
+    //minimum of 3 ints                      
     private static int minimum(int a, int b, int c) {                            
             return Math.min(Math.min(a, b), c);                                      
         }                                                                            
-
-        public static int computeLevenshteinDistance(CharSequence lhs, CharSequence rhs) {      
+    
+    //distance between two words
+    public static int computeLevenshteinDistance(CharSequence lhs, CharSequence rhs) {      
             int[][] distance = new int[lhs.length() + 1][rhs.length() + 1];        
 
             for (int i = 0; i <= lhs.length(); i++)                                 
